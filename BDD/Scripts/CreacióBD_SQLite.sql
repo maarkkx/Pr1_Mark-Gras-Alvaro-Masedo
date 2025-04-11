@@ -48,7 +48,7 @@ CREATE TABLE "escoles" (
 	"popularitat"	TEXT NOT NULL,
 	"restriccio"	DATE,
 	PRIMARY KEY("escola_id" AUTOINCREMENT),
-	CONSTRAINT "fk_poblacio_id" FOREIGN KEY("poblacio_id") REFERENCES ""
+	CONSTRAINT "fk_poblacio_id" FOREIGN KEY("poblacio_id") REFERENCES "poblacions"("poblacio_id")
 );
 
 CREATE TABLE "sectors" (
@@ -62,7 +62,7 @@ CREATE TABLE "sectors" (
 	"popularitat"	TEXT NOT NULL,
 	"restriccio"	DATE,
 	PRIMARY KEY("sector_id" AUTOINCREMENT),
-	CONSTRAINT "fk_escola_id" FOREIGN KEY("escola_id") REFERENCES "escoles"
+	CONSTRAINT "fk_escola_id" FOREIGN KEY("escola_id") REFERENCES "escoles"("escola_id")
 );
 
 CREATE TABLE "vies" (
@@ -81,13 +81,13 @@ CREATE TABLE "vies" (
 	CONSTRAINT "fk_ancoratge_id" FOREIGN KEY("ancoratge_id") REFERENCES "ancoratges"("ancoratge_id"),
 	CONSTRAINT "fk_escalador_id" FOREIGN KEY("escalador_id") REFERENCES "escaladors"("escaldor_id"),
 	CONSTRAINT "fk_sector_id" FOREIGN KEY("sector_id") REFERENCES "sectors"("sector_id"),
-	CONSTRAINT "fk_tipus_roca_id" FOREIGN KEY("tipus_roca_id") REFERENCES ""
+	CONSTRAINT "fk_tipus_roca_id" FOREIGN KEY("tipus_roca_id") REFERENCES "tipus_roques"("roca_id")
 );
 
 CREATE TABLE "vies_utilitza_materials" (
 	"via_id"	INTEGER NOT NULL,
 	"material_id"	INTEGER NOT NULL,
-	CONSTRAINT "fk_material_id" FOREIGN KEY("material_id") REFERENCES "",
+	CONSTRAINT "fk_material_id" FOREIGN KEY("material_id") REFERENCES "materials"("material_id"),
 	CONSTRAINT "fk_via_id" FOREIGN KEY("via_id") REFERENCES "vies"("via_id")
 );
 
@@ -98,6 +98,6 @@ CREATE TABLE "trams" (
 	"nom"	TEXT(35) NOT NULL,
 	"llargada"	INTEGER NOT NULL,
 	PRIMARY KEY("tram_id" AUTOINCREMENT),
-	CONSTRAINT "fk_dificultat_id" FOREIGN KEY("dificultat_id") REFERENCES "",
+	CONSTRAINT "fk_dificultat_id" FOREIGN KEY("dificultat_id") REFERENCES "dificultats"("dificultat_id"),
 	CONSTRAINT "fk_via_id" FOREIGN KEY("via_id") REFERENCES "vies"("via_id")
 );
