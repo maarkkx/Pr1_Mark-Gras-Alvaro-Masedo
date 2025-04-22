@@ -6,11 +6,11 @@ public class Controller {
     public static void menu() {
         Scanner scan = new Scanner(System.in);
         int num = -1;
-        int num2 = -1;
-        int num3 = -1;
+        int num2;
+        int num3;
 
         while(num != 0) {
-
+            num2 = -1;
             //mostrar menu principal
             View.menuPrincipal();
             num = scan.nextInt();
@@ -19,6 +19,7 @@ public class Controller {
                 //cas mostrar menu per modificar dades
                 case 1:
                     while(num2 != 0) {
+                        num3 = -1;
                         View.menuModificarDades();
                         num2 = scan.nextInt();
                         switch (num2) {
@@ -104,7 +105,7 @@ public class Controller {
                 //cas mostrar menu per consultar dades
                 case 2:
                     while(num2 != 0) {
-
+                        num3 = -1;
                         View.menuConsultarDades();
                         num2 = scan.nextInt();
                         switch (num2) {
