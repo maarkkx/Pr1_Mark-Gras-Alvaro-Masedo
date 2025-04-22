@@ -1,6 +1,7 @@
 import dao.DBConnection;
 import java.sql.Connection;
 import view.*;
+import controller.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -11,5 +12,7 @@ public class Main {
         } else {
             System.out.println("No s'ha pogut establir la connexió.");
         }
+
+        Controller.menu();
     }
 }
