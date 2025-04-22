@@ -6,6 +6,7 @@ public class View {
 
         System.out.println("1. Modificar dades");
         System.out.println("2. Consultar dades ");
+        System.out.println("0. Sortir");
     }
 
     public static void menuModificarDades(){
@@ -14,6 +15,7 @@ public class View {
         System.out.println("1. Crear una nova entrada");
         System.out.println("2. Modificar una entrada");
         System.out.println("3. Eliminar una entrada");
+        System.out.println("0. Sortir");
     }
 
     public static void crearDades(){
@@ -22,7 +24,8 @@ public class View {
         System.out.println("1. Escoles");
         System.out.println("2. Sectors");
         System.out.println("3. Vies");
-        System.out.println("3. Escaladors");
+        System.out.println("4. Escaladors");
+        System.out.println("0. Sortir");
     }
 
     public static void modificarDades(){
@@ -31,7 +34,8 @@ public class View {
         System.out.println("1. Escoles");
         System.out.println("2. Sectors");
         System.out.println("3. Vies");
-        System.out.println("3. Escaladors");
+        System.out.println("4. Escaladors");
+        System.out.println("0. Sortir");
     }
 
     public static void eliminarDades(){
@@ -41,6 +45,7 @@ public class View {
         System.out.println("2. Sectors");
         System.out.println("3. Vies");
         System.out.println("4. Escaladors");
+        System.out.println("0. Sortir");
     }
 
     public static void menuConsultarDades(){
@@ -56,6 +61,7 @@ public class View {
         System.out.println("8. Mostrar escaladors amb el mateix nivell màxim assolit");
         System.out.println("9. Mostrar les vies que han passat a \"Apte\" recentment");
         System.out.println("10. Mostrar les vies més llargues d’una escola determinada");
+        System.out.println("0. Sortir");
     }
 
     public static void consultarUna(){
@@ -65,6 +71,7 @@ public class View {
         System.out.println("2. Sectors");
         System.out.println("3. Vies");
         System.out.println("4. Escaladors");
+        System.out.println("0. Sortir");
     }
 
     public static void consultarTotes(){
@@ -74,5 +81,6 @@ public class View {
         System.out.println("2. Sectors");
         System.out.println("3. Vies");
         System.out.println("4. Escaladors");
+        System.out.println("0. Sortir");
     }
 }
