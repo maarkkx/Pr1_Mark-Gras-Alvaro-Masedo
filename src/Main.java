@@ -19,7 +19,6 @@ public class Main {
 
         Escaladors paco = new Escaladors(2314, "paco", "elmejor", 32, "6b+", "Via15-La Trifuerza", "gel");
 
-
         Controller.menu();
         try {
             con.close();
