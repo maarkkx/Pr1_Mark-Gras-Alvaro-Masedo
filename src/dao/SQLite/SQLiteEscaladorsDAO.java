@@ -13,7 +13,7 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
     public void crear(Escaladors escalador) {
         Connection con = DBConnection.openCon();
         try {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO escaladors(nom, alies, edat, nivell, nom_via, estil) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO escaladors(nom, alies, edad, nivell, via_nom, estil) VALUES (?, ?, ?, ?, ?, ?)");
             ps.setString(1, escalador.getNom());
             ps.setString(2, escalador.getAlies());
             ps.setInt(3, escalador.getEdat());
@@ -27,6 +27,7 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
             con.close();
         } catch (SQLException e) {
             System.out.println("Error al afegir dades a la base de dades");
+            e.printStackTrace();
         }
 
     }
