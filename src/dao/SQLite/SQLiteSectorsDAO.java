@@ -20,7 +20,7 @@ public class SQLiteSectorsDAO implements CRUD<Sectors> {
     }
 
     @Override
-    public void llegir(Sectors sectors) {
+    public void llegir() {
 
     }
 }

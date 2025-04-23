@@ -2,6 +2,7 @@ import dao.DBConnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import model.Vies;
 import view.*;
 import controller.*;
 
@@ -14,6 +15,8 @@ public class Main {
         } else {
             System.out.println("No s'ha pogut establir la connexió.");
         }
+
+
 
         Controller.menu();
         try {
