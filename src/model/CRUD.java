@@ -1,11 +1,11 @@
 package model;
 
-public interface CRUD {
-    void crear();
+public interface CRUD<Registre> {
+    void crear(Registre obj);
 
-    void actualitzar();
+    void actualitzar(Registre obj);
 
-    void eliminar();
+    void eliminar(Registre obj);
 
     void llegir();
 }

@@ -1,21 +1,22 @@
 package dao.SQLite;
 
-import model.CRUD;
+import model.*;
 
-public class SQLiteEscaladorsDAO implements CRUD {
+public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
 
     @Override
-    public void crear() {
+    public void crear(Escaladors escalador) {
+
+    }
+
+
+    @Override
+    public void actualitzar(Escaladors escalador) {
 
     }
 
     @Override
-    public void actualitzar() {
-
-    }
-
-    @Override
-    public void eliminar() {
+    public void eliminar(Escaladors escalador) {
 
     }
 
