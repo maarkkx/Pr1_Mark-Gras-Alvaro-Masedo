@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Sectors {
     int id;
@@ -11,8 +12,9 @@ public class Sectors {
     String aproximacio;
     int numVies;
     String popularitat;
+    Date restriccio;
 
-    public Sectors(int id, int id_escola, int numSector, String nom, String coordenades, String aproximacio, int numVies, String popularitat) {
+    public Sectors(int id, int id_escola, int numSector, String nom, String coordenades, String aproximacio, int numVies, String popularitat, Date restriccio) {
         this.id = id;
         this.id_escola = id_escola;
         this.numSector = numSector;
@@ -21,6 +23,7 @@ public class Sectors {
         this.aproximacio = aproximacio;
         this.numVies = numVies;
         this.popularitat = popularitat;
+        this.restriccio = restriccio;
     }
 
     public int getId() {
@@ -53,5 +56,9 @@ public class Sectors {
 
     public String getPopularitat() {
         return popularitat;
+    }
+
+    public Date getRestriccio() {
+        return restriccio;
     }
 }
