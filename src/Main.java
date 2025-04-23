@@ -1,5 +1,7 @@
 import dao.DBConnection;
 import java.sql.Connection;
+import java.sql.SQLException;
+
 import view.*;
 import controller.*;
 
@@ -14,5 +16,11 @@ public class Main {
         }
 
         Controller.menu();
+        try {
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("No s'ha pogut tancar la base de dades");
+        }
+
     }
 }
