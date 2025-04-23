@@ -11,8 +11,9 @@ public class Vies {
     String orientacio;
     String estat;
     String tipus;
+    int llargada;
 
-    public Vies(int id, int idSector, int idAncoratge, int idTipusRocas, int idEscalador, int numVia, String nom, String orientacio, String estat, String tipus) {
+    public Vies(int id, int idSector, int idAncoratge, int idTipusRocas, int idEscalador, int numVia, String nom, String orientacio, String estat, String tipus, int llargada) {
         this.id = id;
         this.idSector = idSector;
         this.idAncoratge = idAncoratge;
@@ -23,6 +24,7 @@ public class Vies {
         this.orientacio = orientacio;
         this.estat = estat;
         this.tipus = tipus;
+        this.llargada = llargada;
     }
 
     public int getId() {
@@ -63,5 +65,9 @@ public class Vies {
 
     public String getTipus() {
         return tipus;
+    }
+
+    public int getLlargada(){
+        return llargada;
     }
 }
