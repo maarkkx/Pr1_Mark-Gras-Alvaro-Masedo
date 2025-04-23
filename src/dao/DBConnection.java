@@ -5,14 +5,13 @@ import java.sql.SQLException;
 
 
 public class DBConnection {
-    public static String dbPath = "jdbc:sqlite:BaseDades.db";
 
     /**
      * Connectar amb una BD indicada en el paràmetre 'url'.
-     * @param url Protocol i ruta cap a la BD<br>Exemple: "jdbc:sqlite:prova.db"
      * @return Connexió amb la BD o 'null' si no s'ha pogut connectar
      */
-    public static Connection openCon(String url) {
+    public static Connection openCon() {
+        String url = "jdbc:sqlite:BaseDades.db";
         Connection con = null;
 
         try {

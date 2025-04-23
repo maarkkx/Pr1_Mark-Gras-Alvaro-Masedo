@@ -5,7 +5,7 @@ import controller.*;
 
 public class Main {
     public static void main(String[] args) {
-        Connection con = DBConnection.openCon(DBConnection.dbPath);
+        Connection con = DBConnection.openCon();
 
         if (con != null) {
             System.out.println("Connexió amb la BD feta correctament.");
