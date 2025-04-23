@@ -18,6 +18,8 @@ public class Main {
         }
 
         Escaladors paco = new Escaladors(2314, "paco", "elmejor", 32, "6b+", "Via15-La Trifuerza", "gel");
+        SQLiteEscaladorsDAO dao = new SQLiteEscaladorsDAO();
+        dao.crear(paco);
 
         Controller.menu();
         try {
