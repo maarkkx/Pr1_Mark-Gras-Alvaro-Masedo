@@ -1,19 +1,11 @@
 package model;
 
 public interface CRUD {
-    public static void crear() {
+    void crear();
 
-    }
+    void actualitzar();
 
-    public static void llegir() {
+    void eliminar();
 
-    }
-
-    public static void actualitzar() {
-
-    }
-
-    public static void eliminar() {
-
-    }
+    void llegir();
 }
