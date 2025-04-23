@@ -23,4 +23,16 @@ public class DBConnection {
 
         return con;
     }
+
+    /**
+     * Desconnectar d'una BD.
+     * @param con Connexió amb la BD
+     */
+    private static void closeCon(Connection con) {
+        try {
+            if (con != null) con.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
