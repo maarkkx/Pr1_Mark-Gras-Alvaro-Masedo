@@ -96,7 +96,7 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
         try {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM escaladors WHERE alies = ?");
             Scanner scan = new Scanner(System.in);
-            System.out.println("Escriu el alies del escalador que vols actualitzar: ");
+            System.out.println("Escriu el alies del escalador que vols veure: ");
             String alies = scan.nextLine();
 
             PreparedStatement check = con.prepareStatement("SELECT COUNT(*) FROM escaladors WHERE alies = ?");
@@ -139,7 +139,7 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
                 );
             }
         } catch (SQLException e) {
-
+            System.out.println(e);
         }
     }
 }

@@ -9,9 +9,9 @@ public class Escoles {
     String aproximacio;
     int numVies;
     String popularitat;
-    LocalDate restriccio;
+    String restriccio;
 
-    public Escoles(int id, int idpob, String nom, String aproximacio, int numVies, String popularitat, LocalDate restriccio) {
+    public Escoles(int id, int idpob, String nom, String aproximacio, int numVies, String popularitat, String restriccio) {
         this.id = id;
         this.idpob = idpob;
         this.nom = nom;
@@ -45,7 +45,7 @@ public class Escoles {
         return popularitat;
     }
 
-    public LocalDate getRestriccio() {
+    public String getRestriccio() {
         return restriccio;
     }
 }

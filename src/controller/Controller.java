@@ -20,14 +20,12 @@ public class Controller {
                 case 1:
                     while(num2 != 0) {
                         num3 = -1;
-                        View.menuModificarDades();
                         num2 = scan.nextInt();
                         switch (num2) {
 
                             //cas mostrar menu per crear dades
                             case 1:
                                 while(num3 != 0) {
-                                    View.crearDades();
                                     num3 = scan.nextInt();
                                     switch (num3) {
                                         case 1:
@@ -52,7 +50,6 @@ public class Controller {
                             //cas mostrar menu modificar una dada
                             case 2:
                                 while(num3 != 0) {
-                                    View.modificarDades();
                                     num3 = scan.nextInt();
                                     switch (num3) {
                                         case 1:
@@ -77,7 +74,6 @@ public class Controller {
                             //cas mostrar menu eliminar dades
                             case 3:
                                 while(num3 != 0) {
-                                    View.eliminarDades();
                                     num3 = scan.nextInt();
                                     switch (num3) {
                                         case 1:
@@ -106,13 +102,11 @@ public class Controller {
                 case 2:
                     while(num2 != 0) {
                         num3 = -1;
-                        View.menuConsultarDades();
                         num2 = scan.nextInt();
                         switch (num2) {
                             //
                             case 1:
                                 while(num3 != 0) {
-                                    View.consultarUna();
                                     num3 = scan.nextInt();
                                     switch(num3) {
                                         case 1:
@@ -136,7 +130,6 @@ public class Controller {
 
                             case 2:
                                 while(num3 != 0) {
-                                    View.consultarTotes();
                                     num3 = scan.nextInt();
                                     switch(num3) {
                                         case 1:
