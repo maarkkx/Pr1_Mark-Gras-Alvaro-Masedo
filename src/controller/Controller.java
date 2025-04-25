@@ -14,7 +14,7 @@ public class Controller {
                     //ESCOLAS
                     int num1 = -1;
                     while (num1 != 0) {
-                        View.menuTaula();
+                        View.menuEscoles();
                         num1 = scan.nextInt();
                         switch (num1) {
                             case 1:
@@ -39,7 +39,7 @@ public class Controller {
                     //SECTORS
                     int num2 = -1;
                     while (num2 != 0) {
-                        View.menuTaula();
+                        View.menuSectors();
                         num2 = scan.nextInt();
                         switch (num2) {
                             case 1:
@@ -64,7 +64,7 @@ public class Controller {
                     //VIES
                     int num3 = -1;
                     while (num3 != 0) {
-                        View.menuTaula();
+                        View.menuVies();
                         num3 = scan.nextInt();
                         switch (num3) {
                             case 1:
@@ -89,7 +89,7 @@ public class Controller {
                     //ESCALADORS
                     int num4 = -1;
                     while (num4 != 0) {
-                        View.menuTaula();
+                        View.menuEscaladors();
                         num4 = scan.nextInt();
                         switch (num4) {
                             case 1:
