@@ -128,7 +128,7 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM escaladors");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                System.out.printf("ID: %-3d Nom: %-20s alies: %-15s Edat: %-3d Nivell: %-4s Nom via: %-25s Estil: %s\n",
+                System.out.printf("ID: %-3d Nom: %-40s alies: %-15s Edat: %-3d Nivell: %-4s Nom via: %-25s Estil: %s\n",
                         rs.getInt("escaldor_id"),
                         rs.getString("nom"),
                         rs.getString("alies"),

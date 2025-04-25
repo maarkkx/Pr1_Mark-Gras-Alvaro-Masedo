@@ -12,9 +12,9 @@ public class Sectors {
     String aproximacio;
     int numVies;
     String popularitat;
-    Date restriccio;
+    String restriccio;
 
-    public Sectors(int id, int id_escola, int numSector, String nom, String coordenades, String aproximacio, int numVies, String popularitat, Date restriccio) {
+    public Sectors(int id, int id_escola, int numSector, String nom, String coordenades, String aproximacio, int numVies, String popularitat, String restriccio) {
         this.id = id;
         this.id_escola = id_escola;
         this.numSector = numSector;
@@ -58,7 +58,7 @@ public class Sectors {
         return popularitat;
     }
 
-    public Date getRestriccio() {
+    public String getRestriccio() {
         return restriccio;
     }
 }

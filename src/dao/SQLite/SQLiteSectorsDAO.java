@@ -24,7 +24,7 @@ public class SQLiteSectorsDAO implements CRUD<Sectors> {
             stmt.setString(5,sectors.getAproximacio());
             stmt.setInt(6,sectors.getNumVies());
             stmt.setString(7,sectors.getPopularitat());
-            stmt.setDate(8, new java.sql.Date(sectors.getRestriccio().getTime()));
+            stmt.setString(8,sectors.getRestriccio());
 
             stmt.executeUpdate();
             System.out.println("S'ha afegit correctament el sector");
@@ -57,7 +57,7 @@ public class SQLiteSectorsDAO implements CRUD<Sectors> {
                 stmt.setString(5,sectors.getAproximacio());
                 stmt.setInt(6,sectors.getNumVies());
                 stmt.setString(7,sectors.getPopularitat());
-                stmt.setDate(8, new java.sql.Date(sectors.getRestriccio().getTime()));
+                stmt.setString(8, sectors.getRestriccio());
                 stmt.setInt(9,sec_id);
                 stmt.executeUpdate();
                 System.out.println("S'ha actualitzat el sector correctament");
@@ -67,7 +67,7 @@ public class SQLiteSectorsDAO implements CRUD<Sectors> {
             stmt.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error al afegir dades a la base de dades");
+            System.out.println("Error al modificar dades a la base de dades");
         }
     }
 
@@ -95,7 +95,7 @@ public class SQLiteSectorsDAO implements CRUD<Sectors> {
             stmt.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error al afegir dades a la base de dades");
+            System.out.println("Error al eliminar dades a la base de dades");
         }
     }
 
@@ -116,23 +116,24 @@ public class SQLiteSectorsDAO implements CRUD<Sectors> {
             if(rs.next() && rs.getInt(1) == 1){
                 stmt.setInt(1,sec_id);
                 ResultSet rs2 = stmt.executeQuery();
-
-                System.out.println("sector_id: " + rs.getInt("string_id"));
-                System.out.println("escola_id: " + rs.getInt("escola_id"));
-                System.out.println("sector_num: " + rs.getInt("sector_num"));
-                System.out.println("nom: " + rs.getString("nom"));
-                System.out.println("coordenades: " + rs.getString("coordenades"));
-                System.out.println("aproximació: " + rs.getString("aproximacio"));
-                System.out.println("vies_qt: " + rs.getInt("vies_qt"));
-                System.out.println("popularitat: " + rs.getString("popularitat"));
-                System.out.println("restricció: " + rs.getDate("restricio"));
+                System.out.printf("Sector ID: %-5d Escola ID: %-5d Sector Num: %-5d Nom: %-20s Coordenades: %-20s Aproximacio: %-20s Vies Qt: %-5d Popularitat: %-6s Restriccio: %-10s\n",
+                        rs2.getInt("sector_id"),
+                        rs2.getInt("escola_id"),
+                        rs2.getInt("sector_num"),
+                        rs2.getString("nom"),
+                        rs2.getString("coordenades"),
+                        rs2.getString("aproximacio"),
+                        rs2.getInt("vies_qt"),
+                        rs2.getString("popularitat"),
+                        rs2.getString("restriccio")
+                );
             } else {
                 System.out.println("El sector no existeix, prova amb un altre id de sector");
             }
             stmt.close();
             con.close();
         } catch (SQLException e) {
-            System.out.println("Error al afegir dades a la base de dades");
+            System.out.println("Error al llegir dades a la base de dades");
         }
     }
 
@@ -143,19 +144,20 @@ public class SQLiteSectorsDAO implements CRUD<Sectors> {
         try (PreparedStatement stmt = con.prepareStatement(sql)){
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                System.out.printf("ID: %-3d escola_id: %-20s sector_num: %-15s Nom: %-3d Coordenades: %-4s Aproximacio: %-25s vies_qt: %s Popularitat: %-3d Restricció: %-3d\n");
-                        rs.getInt("string_id");
-                        rs.getInt("escola_id");
-                        rs.getInt("sector_num");
-                        rs.getString("nom");
-                        rs.getString("coordenades");
-                        rs.getString("aproximacio");
-                        rs.getInt("vies_qt");
-                        rs.getString("popularitat");
-                        rs.getDate("restricio");
+                System.out.printf("Sector ID: %-5d Escola ID: %-5d Sector Num: %-5d Nom: %-20s Coordenades: %-20s Aproximacio: %-20s Vies Qt: %-5d Popularitat: %-6s Restriccio: %-10s\n",
+                        rs.getInt("sector_id"),
+                        rs.getInt("escola_id"),
+                        rs.getInt("sector_num"),
+                        rs.getString("nom"),
+                        rs.getString("coordenades"),
+                        rs.getString("aproximacio"),
+                        rs.getInt("vies_qt"),
+                        rs.getString("popularitat"),
+                        rs.getString("restriccio")
+                );
             }
         } catch (SQLException e) {
-            System.out.println("Error al afegir dades a la base de dades");
+            System.out.println("Error al llegir dades a la base de dades");
         }
     }
 }

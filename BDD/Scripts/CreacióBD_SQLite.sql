@@ -60,7 +60,7 @@ CREATE TABLE "sectors" (
 	"aproximacio"	TINYTEXT NOT NULL,
 	"vies_qt"	INTEGER NOT NULL,
 	"popularitat"	TEXT NOT NULL,
-	"restriccio"	DATE,
+	"restriccio"	TEXT(10),
 	PRIMARY KEY("sector_id" AUTOINCREMENT),
 	CONSTRAINT "fk_escola_id" FOREIGN KEY("escola_id") REFERENCES "escoles"("escola_id")
 );

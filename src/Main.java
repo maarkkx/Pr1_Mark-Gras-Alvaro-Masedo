@@ -3,7 +3,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import dao.SQLite.SQLiteEscaladorsDAO;
+import dao.SQLite.SQLiteSectorsDAO;
 import model.Escaladors;
+import model.Sectors;
 import view.*;
 import controller.*;
 
@@ -17,9 +19,9 @@ public class Main {
             System.out.println("No s'ha pogut establir la connexió.");
         }
 
-        SQLiteEscaladorsDAO dao = new SQLiteEscaladorsDAO();
-        Escaladors escalador = new Escaladors(12321, "paconi", "ratatui", 21, "6b+", "Via15-La Trifuerza", "clasica");
-        dao.eliminar(escalador);
+        SQLiteSectorsDAO dao = new SQLiteSectorsDAO();
+        Sectors sector = new Sectors(12321, 2, 4, "mierdaputrefacta", "41.2314, 1.2315", "cerca de mis cojones", 5, "Alta", "2026-04-11");
+
 
         Controller.menu();
         try {
