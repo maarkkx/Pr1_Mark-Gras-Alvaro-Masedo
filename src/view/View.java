@@ -19,7 +19,44 @@ public class View {
         System.out.println("0. Sortir");
     }
 
-    public static void menuTaula(){
+    public static void menuEscoles(){
+        System.out.println("---- ESCOLES ----");
+        System.out.println("Que vols fer?\n");
+
+        System.out.println("1. Crear una nova entrada");
+        System.out.println("2. Modificar una entrada");
+        System.out.println("3. Eliminar una entrada");
+        System.out.println("4. LListar una entrada");
+        System.out.println("5. Llistar tota la taula");
+        System.out.println("0. Sortir");
+    }
+
+    public static void menuVies(){
+        System.out.println("---- VIES ----");
+        System.out.println("Que vols fer?\n");
+
+        System.out.println("1. Crear una nova entrada");
+        System.out.println("2. Modificar una entrada");
+        System.out.println("3. Eliminar una entrada");
+        System.out.println("4. LListar una entrada");
+        System.out.println("5. Llistar tota la taula");
+        System.out.println("0. Sortir");
+    }
+
+    public static void menuSectors(){
+        System.out.println("---- SECTORS ----");
+        System.out.println("Que vols fer?\n");
+
+        System.out.println("1. Crear una nova entrada");
+        System.out.println("2. Modificar una entrada");
+        System.out.println("3. Eliminar una entrada");
+        System.out.println("4. LListar una entrada");
+        System.out.println("5. Llistar tota la taula");
+        System.out.println("0. Sortir");
+    }
+
+    public static void menuEscaladors(){
+        System.out.println("---- ESCALADORS ----");
         System.out.println("Que vols fer?\n");
 
         System.out.println("1. Crear una nova entrada");
