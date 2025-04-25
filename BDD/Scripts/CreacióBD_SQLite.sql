@@ -46,7 +46,7 @@ CREATE TABLE "escoles" (
 	"aproximacio"	TINYTEXT NOT NULL,
 	"vies_qt"	INTEGER NOT NULL,
 	"popularitat"	TEXT NOT NULL,
-	"restriccio"	DATE,
+	"restriccio"	TEXT(10),
 	PRIMARY KEY("escola_id" AUTOINCREMENT),
 	CONSTRAINT "fk_poblacio_id" FOREIGN KEY("poblacio_id") REFERENCES "poblacions"("poblacio_id")
 );
