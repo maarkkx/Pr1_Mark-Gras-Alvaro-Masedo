@@ -23,7 +23,7 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
             ps.setString(6, escalador.getEstil());
 
             ps.executeUpdate();
-
+            System.out.println("S'ha creat correctament");
             ps.close();
             con.close();
         } catch (SQLException e) {
@@ -38,13 +38,13 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
     public void actualitzar(Escaladors escalador) {
         Connection con = DBConnection.openCon();
         try {
-            PreparedStatement ps = con.prepareStatement("UPDATE escaladors SET nom = ?, alies = ?, edat = ?, nivell = ?, estil = ? WHERE alias = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE escaladors SET nom = ?, alies = ?, edad = ?, nivell = ?, estil = ? WHERE alies = ?");
             Scanner scan = new Scanner(System.in);
-            System.out.println("Escriu el alias del escalador que vols actualitzar: ");
-            String alias = scan.nextLine();
+            System.out.println("Escriu el alies del escalador que vols actualitzar: ");
+            String alies = scan.nextLine();
 
             PreparedStatement check = con.prepareStatement("SELECT COUNT(*) FROM escaladors WHERE alies = ?");
-            check.setString(1, alias);
+            check.setString(1, alies);
             ResultSet rs = check.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
                 ps.setString(1, escalador.getNom());
@@ -52,10 +52,11 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
                 ps.setInt(3, escalador.getEdat());
                 ps.setString(4, escalador.getNivell());
                 ps.setString(5, escalador.getEstil());
-                ps.setString(6, alias);
+                ps.setString(6, alies);
                 ps.executeUpdate();
+                System.out.println("S'ha actualitzat correctament");
             } else {
-                System.out.println("El escalador no existeix, prova amb un altre alias.");
+                System.out.println("El escalador no existeix, prova amb un altre alies.");
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -68,17 +69,18 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
         try {
             PreparedStatement ps = con.prepareStatement("DELETE FROM escaladors WHERE alies = ?");
             Scanner scan = new Scanner(System.in);
-            System.out.println("Escriu el alias del escalador que vols actualitzar: ");
-            String alias = scan.nextLine();
+            System.out.println("Escriu el alies del escalador que vols eliminar: ");
+            String alies = scan.nextLine();
 
             PreparedStatement check = con.prepareStatement("SELECT COUNT(*) FROM escaladors WHERE alies = ?");
-            check.setString(1, alias);
+            check.setString(1, alies);
             ResultSet rs = check.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
-                ps.setString(1, alias);
+                ps.setString(1, alies);
                 ps.executeUpdate();
+                System.out.println("S'ha eliminat correctament");
             } else {
-                System.out.println("El escalador no existeix, prova amb un altre alias.");
+                System.out.println("El escalador no existeix, prova amb un altre alies.");
             }
 
 
@@ -92,26 +94,28 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
     public void llegir() {
         Connection con = DBConnection.openCon();
         try {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM escaladors WHERE alias = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM escaladors WHERE alies = ?");
             Scanner scan = new Scanner(System.in);
-            System.out.println("Escriu el alias del escalador que vols actualitzar: ");
-            String alias = scan.nextLine();
+            System.out.println("Escriu el alies del escalador que vols actualitzar: ");
+            String alies = scan.nextLine();
 
             PreparedStatement check = con.prepareStatement("SELECT COUNT(*) FROM escaladors WHERE alies = ?");
-            check.setString(1, alias);
+            check.setString(1, alies);
             ResultSet rs = check.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
-                ps.setString(1, alias);
+                ps.setString(1, alies);
                 ResultSet rs2 = ps.executeQuery();
-                System.out.println("Escalador trobat:");
-                System.out.println("Nom: " + rs2.getString("nom"));
-                System.out.println("Àlies: " + rs2.getString("alies"));
-                System.out.println("Edat: " + rs2.getInt("edat"));
-                System.out.println("Nivell: " + rs2.getString("nivell"));
-                System.out.println("Nom via: " + rs2.getString("nom_via"));
-                System.out.println("Estil: " + rs2.getString("estil"));
+                System.out.printf("ID: %-3d Nom: %-20s alies: %-15s Edat: %-3d Nivell: %-4s Nom via: %-25s Estil: %s\n",
+                        rs2.getInt("escaldor_id"),
+                        rs2.getString("nom"),
+                        rs2.getString("alies"),
+                        rs2.getInt("edad"),
+                        rs2.getString("nivell"),
+                        rs2.getString("via_nom"),
+                        rs2.getString("estil")
+                );
             } else {
-                System.out.println("El escalador no existeix, prova amb un altre alias.");
+                System.out.println("El escalador no existeix, prova amb un altre alies.");
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -124,7 +128,15 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM escaladors");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("escalador_id") + " Nom: " + rs.getString("nom") + " alias: " + rs.getString("alias") + " Edat: " + rs.getInt("edad") + " Nivell: " + rs.getString("nivell") + " Nom via: " + rs.getString("via_nom") + " Estil: " + rs.getString("estil"));
+                System.out.printf("ID: %-3d Nom: %-20s alies: %-15s Edat: %-3d Nivell: %-4s Nom via: %-25s Estil: %s\n",
+                        rs.getInt("escaldor_id"),
+                        rs.getString("nom"),
+                        rs.getString("alies"),
+                        rs.getInt("edad"),
+                        rs.getString("nivell"),
+                        rs.getString("via_nom"),
+                        rs.getString("estil")
+                );
             }
         } catch (SQLException e) {
 
