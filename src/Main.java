@@ -23,9 +23,6 @@ public class Main {
             System.out.println("No s'ha pogut establir la connexió.");
         }
 
-        SQLiteViesDAO dao = new SQLiteViesDAO();
-        Vies via = new Vies(231241, 1, 2, 3, 2, 26, "calvo", "NE", "Apta", "C", 17);
-        dao.eliminar(via);
 
         Controller.menu();
         try {

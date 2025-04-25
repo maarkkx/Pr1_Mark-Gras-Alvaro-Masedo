@@ -4,155 +4,25 @@ import java.util.Scanner;
 
 public class Controller {
     public static void menu() {
-        Scanner scan = new Scanner(System.in);
         int num = -1;
-        int num2;
-        int num3;
-
-        while(num != 0) {
-            num2 = -1;
-            //mostrar menu principal
+        Scanner scan = new Scanner(System.in);
+        while (num != 0) {
             View.menuPrincipal();
             num = scan.nextInt();
             switch (num) {
-
-                //cas mostrar menu per modificar dades
                 case 1:
-                    while(num2 != 0) {
-                        num3 = -1;
-                        num2 = scan.nextInt();
-                        switch (num2) {
-
-                            //cas mostrar menu per crear dades
+                    //ESCOLAS
+                    int num1 = -1;
+                    while (num1 != 0) {
+                        View.menuTaula();
+                        num1 = scan.nextInt();
+                        switch (num1) {
                             case 1:
-                                while(num3 != 0) {
-                                    num3 = scan.nextInt();
-                                    switch (num3) {
-                                        case 1:
-                                            //LLAMAR DESDE MODELO CREAR ESCOLA
-                                            break;
-
-                                        case 2:
-                                            //LLAMAR DESDE MODELO CREAR SECTORS
-                                            break;
-
-                                        case 3:
-                                            //LLAMAR DESDE MODELO CREAR VIES
-                                            break;
-
-                                        case 4:
-                                            //LLAMAR DESDE MODELO CREAR ESCALADORS
-                                            break;
-                                    }
-                                }
-                                break;
-
-                            //cas mostrar menu modificar una dada
-                            case 2:
-                                while(num3 != 0) {
-                                    num3 = scan.nextInt();
-                                    switch (num3) {
-                                        case 1:
-                                            //LLAMAR DESDE MODELO MODIFICAR ESCOLA
-                                            break;
-
-                                        case 2:
-                                            //LLAMAR DESDE MODELO MODIFICAR SECTORS
-                                            break;
-
-                                        case 3:
-                                            //LLAMAR DESDE MODELO MODIFICAR VIES
-                                            break;
-
-                                        case 4:
-                                            //LLAMAR DESDE MODELO MODIFICAR ESCALADORS
-                                            break;
-                                    }
-                                }
-                                break;
-
-                            //cas mostrar menu eliminar dades
-                            case 3:
-                                while(num3 != 0) {
-                                    num3 = scan.nextInt();
-                                    switch (num3) {
-                                        case 1:
-                                            //LLAMAR DESDE MODELO ELIMINAR ESCOLA
-                                            break;
-
-                                        case 2:
-                                            //LLAMAR DESDE MODELO ELIMINAR SECTORS
-                                            break;
-
-                                        case 3:
-                                            //LLAMAR DESDE MODELO ELIMINAR VIES
-                                            break;
-
-                                        case 4:
-                                            //LLAMAR DESDE MODELO ELIMINAR ESCALADORS
-                                            break;
-                                    }
-                                }
-                                break;
-                        }
-                    }
-                    break;
-
-                //cas mostrar menu per consultar dades
-                case 2:
-                    while(num2 != 0) {
-                        num3 = -1;
-                        num2 = scan.nextInt();
-                        switch (num2) {
-                            //
-                            case 1:
-                                while(num3 != 0) {
-                                    num3 = scan.nextInt();
-                                    switch(num3) {
-                                        case 1:
-                                            //PONER DESDE MODEL CONSULTAR UNA ESCOLA
-                                            break;
-
-                                        case 2:
-                                            //PONER DESDE MODEL CONSULTAR UN SECTOR
-                                            break;
-
-                                        case 3:
-                                            //PONER DESDE MODEL CONSULTAR UNA VIA
-                                            break;
-
-                                        case 4:
-                                            //PONER DESDE MODEL CONSULTAR UN ESCALADOR
-                                            break;
-                                    }
-                                }
                                 break;
 
                             case 2:
-                                while(num3 != 0) {
-                                    num3 = scan.nextInt();
-                                    switch(num3) {
-                                        case 1:
-                                            //PONER DESDE MODEL CONSULTAR TOTES ESCOLES
-                                            break;
-
-                                        case 2:
-                                            //PONER DESDE MODEL CONSULTAR TOTS SECTORS
-                                            break;
-
-                                        case 3:
-                                            //PONER DESDE MODEL CONSULTAR TOTES VIES
-                                            break;
-
-                                        case 4:
-                                            //PONER DESDE MODEL CONSULTAR TOTS ESCALADORS
-                                            break;
-                                    }
-                                }
                                 break;
 
-
-                            //OPCIONS CONSULTAR
                             case 3:
                                 break;
 
@@ -161,26 +31,109 @@ public class Controller {
 
                             case 5:
                                 break;
+                        }
+                    }
+                    break;
 
-                            case 6:
+                case 2:
+                    //SECTORS
+                    int num2 = -1;
+                    while (num2 != 0) {
+                        View.menuTaula();
+                        num2 = scan.nextInt();
+                        switch (num2) {
+                            case 1:
                                 break;
 
-                            case 7:
+                            case 2:
                                 break;
 
-                            case 8:
+                            case 3:
                                 break;
 
-                            case 9:
+                            case 4:
                                 break;
 
-                            case 10:
+                            case 5:
                                 break;
                         }
                     }
                     break;
+
+                case 3:
+                    //VIES
+                    int num3 = -1;
+                    while (num3 != 0) {
+                        View.menuTaula();
+                        num3 = scan.nextInt();
+                        switch (num3) {
+                            case 1:
+                                break;
+
+                            case 2:
+                                break;
+
+                            case 3:
+                                break;
+
+                            case 4:
+                                break;
+
+                            case 5:
+                                break;
+                        }
+                    }
+                    break;
+
+                case 4:
+                    //ESCALADORS
+                    int num4 = -1;
+                    while (num4 != 0) {
+                        View.menuTaula();
+                        num4 = scan.nextInt();
+                        switch (num4) {
+                            case 1:
+                                break;
+
+                            case 2:
+                                break;
+
+                            case 3:
+                                break;
+
+                            case 4:
+                                break;
+
+                            case 5:
+                                break;
+                        }
+                    }
+                    break;
+
+                case 5:
+                    break;
+
+                case 6:
+                    break;
+
+                case 7:
+                    break;
+
+                case 8:
+                    break;
+
+                case 9:
+                    break;
+
+                case 10:
+                    break;
+
+                case 11:
+                    break;
+
+                case 12:
+                    break;
             }
         }
-
     }
 }
