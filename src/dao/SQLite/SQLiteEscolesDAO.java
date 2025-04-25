@@ -104,7 +104,7 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
             if (rs.next() && rs.getInt(1) > 0) {
                 ps.setString(1, nom);
                 ResultSet rs2 = ps.executeQuery();
-                System.out.printf("Escola ID: %-5d Poblacio ID: %-5d Nom: %-50s Aproximacio: %-20s Vies Qt: %-5d Popularitat: %-10s Restriccio: %-10s\n",
+                System.out.printf("Escola ID: %-5d Poblacio ID: %-5d Nom: %s Aproximacio: %s Vies Qt: %-5d Popularitat: %-10s Restriccio: %-10s\n",
                         rs2.getInt("escola_id"),
                         rs2.getInt("poblacio_id"),
                         rs2.getString("nom"),
@@ -127,7 +127,7 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
                 PreparedStatement ps = con.prepareStatement("SELECT * FROM escoles");
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    System.out.printf("Escola ID: %-5d Poblacio ID: %-5d Nom: %-50s Aproximacio: %-20s Vies Qt: %-5d Popularitat: %-10s Restriccio: %-10s\n",
+                    System.out.printf("Escola ID: %-5d Poblacio ID: %-5d Nom: %-30s Aproximacio: %-40s Vies Qt: %-5d Popularitat: %-10s Restriccio: %-10s\n",
                             rs.getInt("escola_id"),
                             rs.getInt("poblacio_id"),
                             rs.getString("nom"),

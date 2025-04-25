@@ -41,7 +41,7 @@ public class SQLiteViesDAO implements CRUD<Vies> {
     @Override
     public void actualitzar(Vies vies) {
         Scanner scan = new Scanner(System.in);
-        String sql = "UPDATE vies SET sector_id = ?, ancoratge_id = ?, tipus_roca = ?, escalador_id = ?, via_num = ?, nom = ?, orientacio = ?, estat = ?, tipus= ?, llargada = ? WHERE via_id = ?";
+        String sql = "UPDATE vies SET sector_id = ?, ancoratge_id = ?, tipus_roca_id = ?, escalador_id = ?, via_num = ?, nom = ?, orientacio = ?, estat = ?, tipus= ?, llargada = ? WHERE via_id = ?";
         Connection con = DBConnection.openCon();
 
         try (PreparedStatement stmt = con.prepareStatement(sql)){
@@ -121,7 +121,7 @@ public class SQLiteViesDAO implements CRUD<Vies> {
             if(rs.next() && rs.getInt(1) == 1){
                 stmt.setInt(1,via_id);
                 ResultSet rs2 = stmt.executeQuery();
-                System.out.printf("Sector ID: %-5d Escalador ID: %-5d Núm Via: %-5d Nom: %-30s Orientació: %-5s Estat: %-10s Tipus: %-2s Llargada: %-3d\n",
+                System.out.printf("Sector ID: %-5d Escalador ID: %-5d Núm Via: %-5d Nom: %s Orientació: %-5s Estat: %-10s Tipus: %-2s Llargada: %-3d\n",
                         rs2.getInt("sector_id"),
                         rs2.getInt("escalador_id"),
                         rs2.getInt("via_num"),
@@ -147,7 +147,7 @@ public class SQLiteViesDAO implements CRUD<Vies> {
         try (PreparedStatement stmt = con.prepareStatement(sql)){
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                System.out.printf("Sector ID: %-5d Escalador ID: %-5d Núm Via: %-5d Nom: %-30s Orientació: %-5s Estat: %-10s Tipus: %-2s Llargada: %-3d\n",
+                System.out.printf("Sector ID: %-5d Escalador ID: %-5d Núm Via: %-5d Nom: %-30s Orientació: %-5s Estat: %-18s Tipus: %-2s Llargada: %-3d\n",
                         rs.getInt("sector_id"),
                         rs.getInt("escalador_id"),
                         rs.getInt("via_num"),

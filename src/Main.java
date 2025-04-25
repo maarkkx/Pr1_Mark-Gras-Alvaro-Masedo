@@ -3,9 +3,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import dao.SQLite.SQLiteEscaladorsDAO;
+import dao.SQLite.SQLiteEscolesDAO;
 import dao.SQLite.SQLiteSectorsDAO;
+import dao.SQLite.SQLiteViesDAO;
 import model.Escaladors;
+import model.Escoles;
 import model.Sectors;
+import model.Vies;
 import view.*;
 import controller.*;
 
@@ -19,9 +23,9 @@ public class Main {
             System.out.println("No s'ha pogut establir la connexió.");
         }
 
-        SQLiteSectorsDAO dao = new SQLiteSectorsDAO();
-        Sectors sector = new Sectors(12321, 2, 4, "mierdaputrefacta", "41.2314, 1.2315", "cerca de mis cojones", 5, "Alta", "2026-04-11");
-
+        SQLiteViesDAO dao = new SQLiteViesDAO();
+        Vies via = new Vies(231241, 1, 2, 3, 2, 26, "calvo", "NE", "Apta", "C", 17);
+        dao.eliminar(via);
 
         Controller.menu();
         try {
