@@ -17,10 +17,6 @@ public class Main {
             System.out.println("No s'ha pogut establir la connexió.");
         }
 
-        Escaladors paco = new Escaladors(2314, "paco", "elmejor", 32, "6b+", "Via15-La Trifuerza", "gel");
-        SQLiteEscaladorsDAO dao = new SQLiteEscaladorsDAO();
-        dao.crear(paco);
-
         Controller.menu();
         try {
             con.close();

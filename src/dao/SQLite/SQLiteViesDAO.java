@@ -6,7 +6,6 @@ import model.Vies;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class SQLiteViesDAO implements CRUD<Vies> {
 
