@@ -58,6 +58,9 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
             } else {
                 System.out.println("El escalador no existeix, prova amb un altre alies.");
             }
+            con.close();
+            ps.close();
+            check.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -82,8 +85,9 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
             } else {
                 System.out.println("El escalador no existeix, prova amb un altre alies.");
             }
-
-
+            con.close();
+            ps.close();
+            check.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -117,6 +121,9 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
             } else {
                 System.out.println("El escalador no existeix, prova amb un altre alies.");
             }
+            con.close();
+            ps.close();
+            check.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -138,6 +145,8 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
                         rs.getString("estil")
                 );
             }
+            con.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println(e);
         }

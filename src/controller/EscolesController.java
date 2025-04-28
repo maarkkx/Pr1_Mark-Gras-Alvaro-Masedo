@@ -29,10 +29,13 @@ public class EscolesController {
                     //Taula poblacions
                     PreparedStatement ps = con.prepareStatement("SELECT * FROM poblacions");
                     ResultSet rs = ps.executeQuery();
-                    System.out.printf("Poblacio ID: %-5d Nom: %-9s\n",
-                            rs.getInt("poblacio_id"),
-                            rs.getString("nom")
-                    );
+                    while (rs.next()) {
+                        System.out.printf("Poblacio ID: %-5d Nom: %-9s\n",
+                                rs.getInt("poblacio_id"),
+                                rs.getString("nom")
+                        );
+                    }
+
                 } catch (SQLException e) {
                     System.out.println(e);
                 }
@@ -55,7 +58,7 @@ public class EscolesController {
                 String popu = "";
                 System.out.println("Escull el numero de la popularitat: \n 1-Alta 2-Mitajana 3-Baixa");
                 int sw1 = scan.nextInt();
-                while (sw1 == 1 || sw1 == 2 || sw1 == 3) {
+                while (sw1 < 1 && sw1 > 3) {
                     System.out.println("Escriu un numero del 1 al 3: ");
                     sw1 = scan.nextInt();
                 }
@@ -80,6 +83,7 @@ public class EscolesController {
 
                 Escoles escola = new Escoles(1, idPob, nom, aprox, qtVies, popu, rest);
                 SQLiteEscolesDAO dao = new SQLiteEscolesDAO();
+                con.close();
                 dao.crear(escola);
             }
         } catch (SQLException e) {
@@ -105,10 +109,12 @@ public class EscolesController {
                         //Taula poblacions
                         PreparedStatement ps = con.prepareStatement("SELECT * FROM poblacions");
                         ResultSet rs = ps.executeQuery();
-                        System.out.printf("Poblacio ID: %-5d Nom: %-9s\n",
-                                rs.getInt("poblacio_id"),
-                                rs.getString("nom")
-                        );
+                        while (rs.next()) {
+                            System.out.printf("Poblacio ID: %-5d Nom: %-9s\n",
+                                    rs.getInt("poblacio_id"),
+                                    rs.getString("nom")
+                            );
+                        }
                     } catch (SQLException e) {
                         System.out.println(e);
                     }
@@ -131,7 +137,7 @@ public class EscolesController {
                     String popu = "";
                     System.out.println("Escull el numero de la popularitat: \n 1-Alta 2-Mitajana 3-Baixa");
                     int sw1 = scan.nextInt();
-                    while (sw1 == 1 || sw1 == 2 || sw1 == 3) {
+                    while (sw1 < 1 && sw1 > 3) {
                         System.out.println("Escriu un numero del 1 al 3: ");
                         sw1 = scan.nextInt();
                     }
@@ -157,6 +163,7 @@ public class EscolesController {
                     Escoles escola = new Escoles(1, idPob, nom, aprox, qtVies, popu, rest);
                     SQLiteEscolesDAO dao = new SQLiteEscolesDAO();
                     dao.llegirTot();
+                    con.close();
                     dao.actualitzar(escola);
                 }
             } catch (SQLException e) {

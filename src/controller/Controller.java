@@ -1,5 +1,6 @@
 package controller;
 import dao.SQLite.SQLiteEscaladorsDAO;
+import dao.SQLite.SQLiteEscolesDAO;
 import view.*;
 import java.util.Scanner;
 
@@ -17,20 +18,26 @@ public class Controller {
                     while (num1 != 0) {
                         View.menuEscoles();
                         num1 = scan.nextInt();
+                        SQLiteEscolesDAO dao = new SQLiteEscolesDAO();
                         switch (num1) {
                             case 1:
+                                EscolesController.crearEscola();
                                 break;
 
                             case 2:
+                                EscolesController.actualitzarEscoles();
                                 break;
 
                             case 3:
+                                EscolesController.eliminarEscola();
                                 break;
 
                             case 4:
+                                dao.llegir();
                                 break;
 
                             case 5:
+                                dao.llegirTot();
                                 break;
                         }
                     }
