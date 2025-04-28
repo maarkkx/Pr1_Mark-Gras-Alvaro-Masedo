@@ -44,6 +44,7 @@ public class Controller {
                         num2 = scan.nextInt();
                         switch (num2) {
                             case 1:
+                                SectorsController.afegirSector();
                                 break;
 
                             case 2:

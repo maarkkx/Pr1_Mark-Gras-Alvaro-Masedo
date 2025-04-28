@@ -1,6 +1,7 @@
 package controller;
 import dao.DBConnection;
 import dao.SQLite.SQLiteSectorsDAO;
+import model.Sectors;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +13,10 @@ import java.util.regex.Pattern;
 
 public class SectorsController {
     SQLiteSectorsDAO sectorsDAO = new SQLiteSectorsDAO();
-    Scanner scan = new Scanner(System.in);
     Connection con = DBConnection.openCon();
 
-    public void afegirSector(){
+    public static void afegirSector(){
+        Scanner scan = new Scanner(System.in);
         System.out.println("Introdueix el nom de l'escola on es troba el sector");
         String nomEscola = scan.nextLine();
 
@@ -75,9 +76,42 @@ public class SectorsController {
         String popularitat = scan.nextLine();
         Boolean popularitatComprovada = comprovarPopularitat(popularitat);
         while (popularitatComprovada == false){
-            System.out.println("");
+            System.out.println("Error: La popularitat está mal introduida.");
+            popularitat = scan.nextLine();
+            popularitatComprovada = comprovarPopularitat(popularitat);
         }
 
+        System.out.println("Popularitat introduída correctament");
+
+        String restriccio = null;
+        while (restriccio == null) {
+            System.out.println("\nEscriu la data de restricció (YYYY-MM-DD) o deixa en blanc si no n'hi ha:");
+            restriccio = comprobarRestriccio(scan.nextLine());
+
+            if (restriccio == null) {
+                System.out.println("Data no vàlida o buit. Intenta-ho de nou.");
+            } else {
+                System.out.println("Data de restricció introduïda correctament: " + restriccio);
+            }
+        }
+
+        int seguentSectorNum = obtenirSectorNum(escola_id);
+
+        Sectors newSector = new Sectors(
+                0,
+                escola_id,
+                seguentSectorNum,
+                nomSector,
+                coordenades,
+                aproximacio,
+                qtVies,
+                popularitat,
+                restriccio
+        );
+
+        SQLiteSectorsDAO dao = new SQLiteSectorsDAO();
+        dao.crear(newSector);
+        System.out.println("El sector s'ha afegit correctament.");
     }
 
     public static int obtenirIdEscola(String nomEscola){
@@ -154,12 +188,50 @@ public class SectorsController {
     }
 
     public static boolean comprovarPopularitat(String popularitat){
-        String popularitatMajus = popularitat.substring(0,1).toUpperCase() + popularitat.substring(1);
+        String popularitatMajus = popularitat.substring(0,1).toUpperCase() + popularitat.substring(1).toLowerCase();
 
-        if (popularitatMajus == "Alta" || popularitatMajus == "Baixa" || popularitatMajus == "Mitjana"){
+        if (popularitatMajus.equals("Alta") || popularitatMajus.equals("Baixa") || popularitatMajus.equals("Mitjana")){
             return true;
         } else {
             return false;
         }
+    }
+
+    public static String comprobarRestriccio(String restriccio) {
+        if (restriccio.trim().isEmpty()) {
+            return null;
+        }
+
+        String regex = "^\\d{4}-\\d{2}-\\d{2}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(restriccio);
+
+        if (matcher.matches()){
+            return restriccio;
+        } else {
+            return null;
+        }
+    }
+
+    public static int obtenirSectorNum (int escola_id){
+        String sql = "SELECT MAX(sector_num) FROM sectors WHERE escola_id = ?";
+        int sectorNum = 1;
+
+        try (Connection con = DBConnection.openCon();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, escola_id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int maxSectorNum = rs.getInt(1);
+                if (maxSectorNum > 0) {
+                    sectorNum = maxSectorNum + 1;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error obtenir el seguent SectorNum: " + e.getMessage());
+        }
+
+        return sectorNum;
     }
 }
