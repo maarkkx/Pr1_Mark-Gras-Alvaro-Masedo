@@ -31,48 +31,51 @@ public class EscaladorsController {
         //edat
         System.out.println("Escriu l'edat: ");
             int edad = scan.nextInt();
+            scan.nextLine();
 
 
         //Nivell
         String nivell = "";
         System.out.println("Escull la dificultat maxima del escalador, primer un numero del 4 al 9: ");
         int niv = scan.nextInt();
+        scan.nextLine();
         while (niv < 4 && niv > 9) {
             System.out.println("El nivell ha de ser un numero del 4 al 9, torna a intentar-ho: ");
             niv = scan.nextInt();
+            scan.nextLine();
         }
 
         if (niv == 4) {
-            nivell += 4;
+            nivell += "4";
             System.out.println("Dificultat 4 o 4+? (No escriguis res en cas de 4 o escriu nomes + en cas de 4+): ");
-            nivell += scan.nextLine();
+            nivell = scan.nextLine();
         } else if (niv == 5) {
-            nivell += 5;
+            nivell += "5";
             System.out.println("Dificultat 5 o 5+? (No escriguis res en cas de 5 o escriu nomes + en cas de 5+): ");
             nivell += scan.nextLine();
         } else if (niv == 6) {
-            nivell += 6;
+            nivell += "6";
             System.out.println("Dificultat 6a, 6b o 6c? (Escriu nomes la lletra en minuscula)");
             nivell += scan.nextLine();
 
             System.out.println("Dificultat + o no? (No escriguis res si no es + o escriu nomes + si ho es");
             nivell += scan.nextLine();
         } else if (niv == 7) {
-            nivell += 7;
+            nivell += "7";
             System.out.println("Dificultat 7a, 7b o 7c? (Escriu nomes la lletra en minuscula)");
             nivell += scan.nextLine();
 
             System.out.println("Dificultat + o no? (No escriguis res si no es + o escriu nomes + si ho es");
             nivell += scan.nextLine();
         } else if (niv == 8) {
-            nivell += 8;
+            nivell += "8";
             System.out.println("Dificultat 8a, 8b o 8c? (Escriu nomes la lletra en minuscula)");
             nivell += scan.nextLine();
 
             System.out.println("Dificultat + o no? (No escriguis res si no es + o escriu nomes + si ho es");
             nivell += scan.nextLine();
         } else if (niv == 9) {
-            nivell += 9;
+            nivell += "9";
             System.out.println("Dificultat 9a, 9b o 9c? (Escriu nomes la lletra en minuscula)");
             nivell += scan.nextLine();
 
@@ -89,6 +92,7 @@ public class EscaladorsController {
         String estil = "";
         System.out.println("Quin estil fa? (Escriu el numero): \n 1-Esportiva 2-Gel 3-Clàssica");
         int est = scan.nextInt();
+        scan.nextLine();
         switch (est) {
             case 1:
                 estil = "esportiva";
@@ -133,15 +137,18 @@ public class EscaladorsController {
         //edat
         System.out.println("Escriu l'edat: ");
         int edad = scan.nextInt();
+        scan.nextLine();
 
 
         //Nivell
         String nivell = "";
         System.out.println("Escull la dificultat maxima del escalador, primer un numero del 4 al 9: ");
         int niv = scan.nextInt();
+        scan.nextLine();
         while (niv < 4 && niv > 9) {
             System.out.println("El nivell ha de ser un numero del 4 al 9, torna a intentar-ho: ");
             niv = scan.nextInt();
+            scan.nextLine();
         }
 
         if (niv == 4) {
@@ -191,6 +198,7 @@ public class EscaladorsController {
         String estil = "";
         System.out.println("Quin estil fa? (Escriu el numero): \n 1-Esportiva 2-Gel 3-Clàssica");
         int est = scan.nextInt();
+        scan.nextLine();
         switch (est) {
             case 1:
                 estil = "esportiva";
