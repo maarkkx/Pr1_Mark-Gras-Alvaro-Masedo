@@ -93,6 +93,7 @@ public class Controller {
                         num4 = scan.nextInt();
                         switch (num4) {
                             case 1:
+                                EscaladorsController.crearEscalador();
                                 break;
 
                             case 2:
