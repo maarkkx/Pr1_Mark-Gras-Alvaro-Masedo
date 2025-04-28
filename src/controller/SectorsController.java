@@ -73,8 +73,10 @@ public class SectorsController {
 
         System.out.println("\nEscriu la popularitat de la via (Alta, Mitjana o Baixa)");
         String popularitat = scan.nextLine();
-
-        while ()
+        Boolean popularitatComprovada = comprovarPopularitat(popularitat);
+        while (popularitatComprovada == false){
+            System.out.println("");
+        }
 
     }
 
@@ -151,5 +153,13 @@ public class SectorsController {
         return viesDisponibles;
     }
 
-    public static boolean comprovarPopularitat
+    public static boolean comprovarPopularitat(String popularitat){
+        String popularitatMajus = popularitat.substring(0,1).toUpperCase() + popularitat.substring(1);
+
+        if (popularitatMajus == "Alta" || popularitatMajus == "Baixa" || popularitatMajus == "Mitjana"){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
