@@ -1,4 +1,5 @@
 package controller;
+import dao.SQLite.SQLiteEscaladorsDAO;
 import view.*;
 import java.util.Scanner;
 
@@ -89,22 +90,28 @@ public class Controller {
                     //ESCALADORS
                     int num4 = -1;
                     while (num4 != 0) {
+                        SQLiteEscaladorsDAO dao = new SQLiteEscaladorsDAO();
                         View.menuEscaladors();
                         num4 = scan.nextInt();
                         switch (num4) {
                             case 1:
+                                EscaladorsController.crearEscalador();
                                 break;
 
                             case 2:
+                                EscaladorsController.actualitzarEscalador();
                                 break;
 
                             case 3:
+                                EscaladorsController.eliminarEscalador();
                                 break;
 
                             case 4:
+                                dao.llegir();
                                 break;
 
                             case 5:
+                                dao.llegirTot();
                                 break;
                         }
                     }
