@@ -74,8 +74,8 @@ public class SectorsController {
 
         System.out.println("\nEscriu la popularitat de la via (Alta, Mitjana o Baixa)");
         String popularitat = scan.nextLine();
-        Boolean popularitatComprovada = comprovarPopularitat(popularitat);
-        while (popularitatComprovada == false){
+        String popularitatComprovada = comprovarPopularitat(popularitat);
+        while (popularitatComprovada == null){
             System.out.println("Error: La popularitat está mal introduida.");
             popularitat = scan.nextLine();
             popularitatComprovada = comprovarPopularitat(popularitat);
@@ -83,16 +83,12 @@ public class SectorsController {
 
         System.out.println("Popularitat introduída correctament");
 
-        String restriccio = null;
-        while (restriccio == null) {
-            System.out.println("\nEscriu la data de restricció (YYYY-MM-DD) o deixa en blanc si no n'hi ha:");
-            restriccio = comprobarRestriccio(scan.nextLine());
-
-            if (restriccio == null) {
-                System.out.println("Data no vàlida o buit. Intenta-ho de nou.");
-            } else {
-                System.out.println("Data de restricció introduïda correctament: " + restriccio);
-            }
+        System.out.println("\nEscriu la data de restricció (YYYY-MM-DD) o deixa en blanc si no n'hi ha:");
+        String restriccio = comprobarRestriccio(scan.nextLine());
+        if (restriccio == null) {
+            System.out.println("No s'ha introduit cap restricció");
+        } else {
+            System.out.println("Data de restricció introduïda correctament: " + restriccio);
         }
 
         int seguentSectorNum = obtenirSectorNum(escola_id);
@@ -187,13 +183,17 @@ public class SectorsController {
         return viesDisponibles;
     }
 
-    public static boolean comprovarPopularitat(String popularitat){
-        String popularitatMajus = popularitat.substring(0,1).toUpperCase() + popularitat.substring(1).toLowerCase();
+    public static String comprovarPopularitat(String popularitat){
+        if (popularitat == null || popularitat.trim().isEmpty()) {
+            return null;
+        }
 
-        if (popularitatMajus.equals("Alta") || popularitatMajus.equals("Baixa") || popularitatMajus.equals("Mitjana")){
-            return true;
+        popularitat = popularitat.substring(0,1).toUpperCase() + popularitat.substring(1).toLowerCase();
+
+        if (popularitat.equals("Alta") || popularitat.equals("Baixa") || popularitat.equals("Mitjana")){
+            return popularitat;
         } else {
-            return false;
+            return null;
         }
     }
 
