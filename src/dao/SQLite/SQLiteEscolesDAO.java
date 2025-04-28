@@ -25,8 +25,8 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
 
             ps.executeUpdate();
             System.out.println("S'ha creat correctament");
-            ps.close();
             con.close();
+            ps.close();
         } catch (SQLException e) {
             System.out.println("Error al afegir dades a la base de dades");
             e.printStackTrace();
@@ -58,6 +58,9 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
             } else {
                 System.out.println("La escola no existeix, prova amb un altre nom.");
             }
+            con.close();
+            ps.close();
+            check.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -83,7 +86,9 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
                 System.out.println("La escola no existeix, prova amb un altre nom.");
             }
 
-
+            con.close();
+            ps.close();
+            check.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -116,6 +121,9 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
             } else {
                 System.out.println("La escola no existeix, prova amb un altre nom.");
             }
+            con.close();
+            ps.close();
+            check.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -137,6 +145,8 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
                             rs.getString("restriccio")
                     );
                 }
+                con.close();
+                ps.close();
             } catch (SQLException e) {
                 System.out.println(e);
             }
