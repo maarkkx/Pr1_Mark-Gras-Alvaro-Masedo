@@ -12,9 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SectorsController {
-    SQLiteSectorsDAO sectorsDAO = new SQLiteSectorsDAO();
-    Connection con = DBConnection.openCon();
-
     public static void afegirSector(){
         Scanner scan = new Scanner(System.in);
         System.out.println("Introdueix el nom de l'escola on es troba el sector");
@@ -33,6 +30,10 @@ public class SectorsController {
 
         System.out.println("Quin és el nom del sector?");
         String nomSector = scan.nextLine();
+        while (nomSector == null || nomSector.trim().isEmpty()){
+            System.out.println("Error: torna a escriure el nom del Sector.");
+            nomSector = scan.nextLine();
+        }
 
         System.out.println("Escriu les coordenades de aquest Sector: ");
         System.out.println("Han de tenir aquest format: (00.0000, 00.0000)");
@@ -49,6 +50,10 @@ public class SectorsController {
 
         System.out.println("Escriu una petita aproximació per arribar al Sector");
         String aproximacio = scan.nextLine();
+        while (aproximacio == null || aproximacio.trim().isEmpty()){
+            System.out.println("Error: torna a escriure l'aproximació del Sector.");
+            aproximacio = scan.nextLine();
+        }
 
         int qtVies = -1;
         while (qtVies < 0) {
@@ -74,14 +79,13 @@ public class SectorsController {
 
         System.out.println("\nEscriu la popularitat de la via (Alta, Mitjana o Baixa)");
         String popularitat = scan.nextLine();
-        String popularitatComprovada = comprovarPopularitat(popularitat);
-        while (popularitatComprovada == null){
+        while (comprovarPopularitat(popularitat) == null){
             System.out.println("Error: La popularitat está mal introduida.");
             popularitat = scan.nextLine();
-            popularitatComprovada = comprovarPopularitat(popularitat);
         }
 
-        System.out.println("Popularitat introduída correctament");
+        System.out.println("Popularitat introduída correctament" + popularitat);
+        String popularitatMajus = popularitat.substring(0, 1).toUpperCase() + popularitat.substring(1).toLowerCase();
 
         System.out.println("\nEscriu la data de restricció (YYYY-MM-DD) o deixa en blanc si no n'hi ha:");
         String restriccio = comprobarRestriccio(scan.nextLine());
@@ -101,7 +105,7 @@ public class SectorsController {
                 coordenades,
                 aproximacio,
                 qtVies,
-                popularitat,
+                popularitatMajus,
                 restriccio
         );
 
@@ -188,7 +192,7 @@ public class SectorsController {
             return null;
         }
 
-        popularitat = popularitat.substring(0,1).toUpperCase() + popularitat.substring(1).toLowerCase();
+        popularitat = popularitat.substring(0, 1).toUpperCase() + popularitat.substring(1).toLowerCase();
 
         if (popularitat.equals("Alta") || popularitat.equals("Baixa") || popularitat.equals("Mitjana")){
             return popularitat;
