@@ -168,9 +168,6 @@ public class Controller {
 
                 case 11:
                     break;
-
-                case 12:
-                    break;
             }
         }
     }
