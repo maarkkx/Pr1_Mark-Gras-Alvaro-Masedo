@@ -114,6 +114,126 @@ public class SectorsController {
         System.out.println("El sector s'ha afegit correctament.");
     }
 
+    public static void actualitzarSector(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Introdueix el nou nom de l'escola on es troba el sector");
+        String nomEscola = scan.nextLine();
+
+        int idEscola = obtenirIdEscola(nomEscola);
+        while (idEscola == -1){
+            System.out.println("Aquesta escola no exsisteix.");
+            System.out.println("Introdueix el nou nom de l'escola on es troba el sector");
+            nomEscola = scan.nextLine();
+            obtenirIdEscola(nomEscola);
+        }
+
+        System.out.println("La escola és vàlida");
+        int escola_id = obtenirIdEscola(nomEscola);
+
+        System.out.println("Quin és el nou nom del sector?");
+        String nomSector = scan.nextLine();
+        while (nomSector == null || nomSector.trim().isEmpty()){
+            System.out.println("Error: torna a escriure el nou nom del Sector.");
+            nomSector = scan.nextLine();
+        }
+
+        System.out.println("Escriu les noves coordenades de aquest Sector: ");
+        System.out.println("Han de tenir aquest format: (00.0000, 00.0000)");
+        String coordenades = scan.nextLine();
+
+        while (!comprovarCoordenades(coordenades)) {
+            System.out.println("Les coordenades no són vàlides");
+            System.out.println("Escriu les noves coordenades de aquest Sector: ");
+            System.out.println("Han de tenir aquest format: (00.0000, 00.0000)");
+            coordenades = scan.nextLine();
+        }
+
+        System.out.println("Les coordenades són vàlides");
+
+        System.out.println("Escriu una nova petita aproximació per arribar al Sector");
+        String aproximacio = scan.nextLine();
+        while (aproximacio == null || aproximacio.trim().isEmpty()){
+            System.out.println("Error: torna a escriure una nova aproximació del Sector.");
+            aproximacio = scan.nextLine();
+        }
+
+        int qtVies = -1;
+        while (qtVies < 0) {
+            System.out.println("Escriu la nova quantitat de vies per aquest sector (ha de ser un número positiu):");
+            if (scan.hasNextInt()) {
+                qtVies = scan.nextInt();
+                if (qtVies < 0) {
+                    System.out.println("La quantitat de vies ha de ser un número positiu.");
+                }
+            } else {
+                System.out.println("Error: La quantitat de vies ha de ser un número.");
+                scan.next();
+            }
+        }
+
+        while (!comprovarVies(escola_id, qtVies)) {
+            System.out.println("No hi ha prou vies disponibles per afegir o el número de vies no és vàlid.");
+            System.out.println("Escriu la quantitat de vies per aquest sector (ha de ser un número positiu):");
+            qtVies = scan.nextInt();
+        }
+
+        System.out.println("Les vies es poden afegir al sector.");
+
+        System.out.println("\nEscriu la popularitat de la via (Alta, Mitjana o Baixa)");
+        String popularitat = scan.nextLine();
+        while (comprovarPopularitat(popularitat) == null){
+            System.out.println("Error: La popularitat está mal introduida.");
+            popularitat = scan.nextLine();
+        }
+
+        System.out.println("Popularitat introduída correctament" + popularitat);
+        String popularitatMajus = popularitat.substring(0, 1).toUpperCase() + popularitat.substring(1).toLowerCase();
+
+        System.out.println("\nEscriu una nova data de restricció (YYYY-MM-DD) o deixa en blanc si no n'hi ha:");
+        String restriccio = comprobarRestriccio(scan.nextLine());
+        if (restriccio == null) {
+            System.out.println("No s'ha introduit cap restricció");
+        } else {
+            System.out.println("Data de restricció introduïda correctament: " + restriccio);
+        }
+
+        int seguentSectorNum = obtenirSectorNum(escola_id);
+
+        Sectors newSector = new Sectors(
+                0,
+                escola_id,
+                seguentSectorNum,
+                nomSector,
+                coordenades,
+                aproximacio,
+                qtVies,
+                popularitatMajus,
+                restriccio
+        );
+
+        SQLiteSectorsDAO dao = new SQLiteSectorsDAO();
+        dao.llegirTot();
+        dao.actualitzar(newSector);
+    }
+
+    public static void eliminarSector(){
+        Sectors newSector = new Sectors(
+                1,
+                2,
+                2,
+                "a",
+                "E",
+                "ad",
+                2,
+                "A",
+                "2"
+        );
+
+        SQLiteSectorsDAO dao = new SQLiteSectorsDAO();
+        dao.llegirTot();
+        dao.eliminar(newSector);
+    }
+
     public static int obtenirIdEscola(String nomEscola){
         String sql = "SELECT escola_id FROM escoles WHERE nom = ?";
 

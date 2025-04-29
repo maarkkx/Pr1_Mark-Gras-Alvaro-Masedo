@@ -55,9 +55,11 @@ public class Controller {
                                 break;
 
                             case 2:
+                                SectorsController.actualitzarSector();
                                 break;
 
                             case 3:
+                                SectorsController.eliminarSector();
                                 break;
 
                             case 4:
