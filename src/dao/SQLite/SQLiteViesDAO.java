@@ -161,4 +161,35 @@ public class SQLiteViesDAO implements CRUD<Vies> {
             System.out.println("Error al llegir dades a la base de dades");
         }
     }
+
+    public void totesViesEscola() {
+        Connection con = DBConnection.openCon();
+        try {
+            Scanner scan = new Scanner(System.in);
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM vies WHERE sector_id = (SELECT sector_id\n" +
+                    "FROM sectors" +
+                    "WHERE escola_id = (SELECT escola_id" +
+                    "FROM escoles" +
+                    "WHERE nom = ?)) AND estat = \"Apta\";");
+
+            String nom = scan.nextLine();
+            ps.setString(1, nom);
+
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                System.out.printf("Sector ID: %-5d Escalador ID: %-5d Núm Via: %-5d Nom: %-30s Orientació: %-5s Estat: %-18s Tipus: %-2s Llargada: %-3d\n",
+                        rs.getInt("sector_id"),
+                        rs.getInt("escalador_id"),
+                        rs.getInt("via_num"),
+                        rs.getString("nom"),
+                        rs.getString("orientacio"),
+                        rs.getString("estat"),
+                        rs.getString("tipus"),
+                        rs.getInt("llargada"));
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }

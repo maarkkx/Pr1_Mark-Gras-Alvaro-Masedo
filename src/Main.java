@@ -23,7 +23,6 @@ public class Main {
             System.out.println("No s'ha pogut establir la connexió.");
         }
 
-
         Controller.menu();
         try {
             con.close();
