@@ -166,12 +166,11 @@ public class SQLiteViesDAO implements CRUD<Vies> {
         Connection con = DBConnection.openCon();
         try {
             Scanner scan = new Scanner(System.in);
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM vies WHERE sector_id = (SELECT sector_id\n" +
-                    "FROM sectors" +
-                    "WHERE escola_id = (SELECT escola_id" +
-                    "FROM escoles" +
-                    "WHERE nom = ?)) AND estat = \"Apta\";");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM vies WHERE sector_id = (SELECT sector_id FROM sectors WHERE escola_id = (SELECT escola_id FROM escoles WHERE nom = ?)) AND estat = \"Apta\";");
 
+            SQLiteEscolesDAO dao = new SQLiteEscolesDAO();
+            dao.llegirTot();
+            System.out.println("Escriu el nom de la escola: ");
             String nom = scan.nextLine();
             ps.setString(1, nom);
 
