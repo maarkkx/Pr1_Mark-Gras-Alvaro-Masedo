@@ -1,6 +1,7 @@
 package controller;
 import dao.SQLite.SQLiteEscaladorsDAO;
 import dao.SQLite.SQLiteEscolesDAO;
+import dao.SQLite.SQLiteSectorsDAO;
 import view.*;
 import java.util.Scanner;
 
@@ -63,9 +64,11 @@ public class Controller {
                                 break;
 
                             case 4:
+                                SectorsController.llistarUn();
                                 break;
 
                             case 5:
+                                SectorsController.llistarTot();
                                 break;
                         }
                     }

@@ -234,6 +234,16 @@ public class SectorsController {
         dao.eliminar(newSector);
     }
 
+    public static void llistarUn(){
+        SQLiteSectorsDAO dao = new SQLiteSectorsDAO();
+        dao.llegir();
+    }
+
+    public static void llistarTot(){
+        SQLiteSectorsDAO dao = new SQLiteSectorsDAO();
+        dao.llegirTot();
+    }
+
     public static int obtenirIdEscola(String nomEscola){
         String sql = "SELECT escola_id FROM escoles WHERE nom = ?";
 
