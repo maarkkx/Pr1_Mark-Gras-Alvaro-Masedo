@@ -10,6 +10,10 @@ import java.util.Scanner;
 
 public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
 
+    /**
+     * Funcio per crear un registre en la base de dades de escalada
+     * @param escalador objecte d'on treure els parametres per la comanda sql
+     */
     @Override
     public void crear(Escaladors escalador) {
         Connection con = DBConnection.openCon();
@@ -33,7 +37,10 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
 
     }
 
-
+    /**
+     * Funcio per actualitzar un registre de la base de dades de escalada
+     * @param escalador Agafa els parametres del objecte i els modifica al registre indicat.
+     */
     @Override
     public void actualitzar(Escaladors escalador) {
         Connection con = DBConnection.openCon();
@@ -66,6 +73,10 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
         }
     }
 
+    /**
+     * Funcio que amb el alies del escalador elimina el registre
+     * @param escalador -
+     */
     @Override
     public void eliminar(Escaladors escalador) {
         Connection con = DBConnection.openCon();
@@ -94,6 +105,9 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
 
     }
 
+    /**
+     * Funcio per buscar un escalador en concret pasant-li el alies
+     */
     @Override
     public void llegir() {
         Connection con = DBConnection.openCon();
@@ -129,6 +143,9 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
         }
     }
 
+    /**
+     * Funcio per llegir tota la taula de escaladors
+     */
     public void llegirTot() {
         Connection con = DBConnection.openCon();
         try {

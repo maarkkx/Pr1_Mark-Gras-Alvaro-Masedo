@@ -11,6 +11,11 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class SQLiteEscolesDAO implements CRUD <Escoles> {
+
+    /**
+     * Funcio per crear un registre de escola en la base de dades de escalada
+     * @param escola objecte d'on agafa els parametres necessaris per crear un registre
+     */
     @Override
     public void crear(Escoles escola) {
         Connection con = DBConnection.openCon();
@@ -33,6 +38,11 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
         }
     }
 
+
+    /**
+     * funcio per actualitzar una escola de la base de dades de escalada
+     * @param escola objecte d'on agafa els parametres per modificar un registre
+     */
     @Override
     public void actualitzar(Escoles escola) {
         Connection con = DBConnection.openCon();
@@ -66,6 +76,10 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
         }
     }
 
+    /**
+     * Funcio per eliminar una escola segons el seu nom
+     * @param escola -
+     */
     @Override
     public void eliminar(Escoles escola) {
         Connection con = DBConnection.openCon();
@@ -94,6 +108,9 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
         }
     }
 
+    /**
+     * Funcio per buscar un registre concret segons el nom de la escola
+     */
     @Override
     public void llegir() {
         Connection con = DBConnection.openCon();
@@ -129,7 +146,10 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
         }
     }
 
-        public void llegirTot() {
+    /**
+     * Funcio per llegir tota la taula de escoles
+     */
+    public void llegirTot() {
             Connection con = DBConnection.openCon();
             try {
                 PreparedStatement ps = con.prepareStatement("SELECT * FROM escoles");
@@ -152,7 +172,10 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
             }
         }
 
-        public void escolesRestriccio() {
+    /**
+     * Funcio per una consulta especifica (Buscar escoles amb restriccions)
+     */
+    public void escolesRestriccio() {
         Connection con = DBConnection.openCon();
             try {
                 PreparedStatement ps = con.prepareStatement("SELECT * FROM escoles WHERE restriccio IS NOT NULL OR restriccio != \"\" OR restriccio != \" \";");
