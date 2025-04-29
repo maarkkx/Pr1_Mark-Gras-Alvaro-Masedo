@@ -11,6 +11,10 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class EscolesController {
+
+    /**
+     * Crea un objecte i li pasa el objecte a un altre funcio de escolesDAO la qual crea el registre
+     */
     public static void crearEscola() {
         Connection con = DBConnection.openCon();
         Scanner scan = new Scanner(System.in);
@@ -91,6 +95,9 @@ public class EscolesController {
         }
     }
 
+    /**
+     * Funcio actualitzar escoles, crea un objecte i li pasa a una funcio de escolaDAO
+     */
     public static void actualitzarEscoles() {
             Connection con = DBConnection.openCon();
             Scanner scan = new Scanner(System.in);
@@ -171,6 +178,9 @@ public class EscolesController {
             }
     }
 
+    /**
+     * Crida funcio per llegir tota la taula de escoles i despres executa la funcio de eliminar
+     */
     public static void eliminarEscola() {
         SQLiteEscolesDAO dao = new SQLiteEscolesDAO();
         Escoles escola = new Escoles(1, 1, "def", "def", 21, "def", "def");
