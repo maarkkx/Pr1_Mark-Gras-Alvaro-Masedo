@@ -138,6 +138,9 @@ public class Controller {
                     break;
 
                 case 6:
+                    //Vies per rang de dificultat
+                    SQLiteViesDAO dao2 = new SQLiteViesDAO();
+                    dao2.viesRangDificultat();
                     break;
 
                 case 7:
