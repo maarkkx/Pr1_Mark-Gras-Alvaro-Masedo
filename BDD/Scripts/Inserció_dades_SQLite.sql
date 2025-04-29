@@ -59,8 +59,8 @@ INSERT INTO escoles (poblacio_id, nom, aproximacio, vies_qt, popularitat, restri
 
 INSERT INTO sectors (escola_id, sector_num, nom, coordenades, aproximacio, vies_qt, popularitat, restriccio) 
 	VALUES 
-		(1, 1, 'Sector Est', '41.2783, 0.9072', '5 minuts a peu', 10, 'Mitjana', '2025-06-01'),
-		(1, 2, 'Sector Oest', '41.6761, 2.7879', '5 minuts amb bici (pujar pel camí blau)', 10, 'Alta', NULL),
+		(1, 1, 'Sector Est', '41.2783, 0.9072', '5 minuts a peu', 8, 'Mitjana', '2025-06-01'),
+		(1, 2, 'Sector Oest', '41.6761, 2.7879', '5 minuts amb bici (pujar pel camí blau)', 12, 'Alta', NULL),
 		(1, 3, 'Sector Nord', '41.3685, 2.1565', '5 minuts a bici i 10 a peu (zona restringida)', 5, 'Mitjana', NULL),
 		
 		(2, 1, 'Les Agulles', '41.3685, 2.1565', '10 minuts a peu', 18, 'Alta', NULL),
@@ -70,17 +70,17 @@ INSERT INTO sectors (escola_id, sector_num, nom, coordenades, aproximacio, vies_
 		(3, 1, 'Sant Pere', '8.2020, 42.9809', 'camí de color verd (a peu)', 10, 'Alta', NULL),
 
 		(4, 1, 'La Fissura del Diable', '41.3685, 2.1565', '20 minuts amb fort desnivell', 7, 'Alta', NULL),
-		(4, 2, 'Els Miradors', '41.3685, 2.1565', 'Ruta d’accés des del refugi (25 minuts)', 5, 'Mitjana', '2025-10-15'),
+		(4, 2, 'Els Miradors', '41.3685, 2.1565', 'Ruta d’accés des del refugi (25 minuts)', 6, 'Mitjana', '2025-10-15'),
 		(4, 3, 'Roca de la Llum', '41.3685, 2.1565', 'Tram exposat amb corda fixa (10 min)', 3, 'Alta', NULL),
-		(4, 4, 'L’Emboscat', '41.3685, 2.1565', '5 minuts entre pins espessos', 5, 'Baixa', NULL),
+		(4, 4, 'L’Emboscat', '41.3685, 2.1565', '5 minuts entre pins espessos', 4, 'Baixa', NULL),
 
 		(5, 1, 'Cingle Estret', '41.3685, 2.1565', 'Accés fàcil en bici, 3 minuts', 10, 'Mitjana', NULL),
-		(5, 2, 'El Pas del Vent', '41.3685, 2.1565', 'Senda marcada amb cordes (12 minuts)', 5, 'Alta', NULL),
-		(5, 3, 'Balma del Sol', '41.3685, 2.1565', 'Des de la pista forestal, 20 minuts', 5, 'Mitjana', '2025-07-20'),
-		(5, 4, 'Mur Gris', '41.3685, 2.1565', 'Accés directe amb vehicle 4x4', 7, 'Alta', NULL),
+		(5, 2, 'El Pas del Vent', '41.3685, 2.1565', 'Senda marcada amb cordes (12 minuts)', 6, 'Alta', NULL),
+		(5, 3, 'Balma del Sol', '41.3685, 2.1565', 'Des de la pista forestal, 20 minuts', 4, 'Mitjana', '2025-07-20'),
+		(5, 4, 'Mur Gris', '41.3685, 2.1565', 'Accés directe amb vehicle 4x4', 5, 'Alta', NULL),
 		(5, 5, 'Els Encantats', '41.3685, 2.1565', 'Camí estret amb vistes panoràmiques', 3, 'Mitjana', NULL),
 		(5, 6, 'Agulles Negres', '41.3685, 2.1565', 'Ascens tècnic amb grimpada', 13, 'Alta', '2025-06-30'),
-		(5, 7, 'Pla dels Cims', '41.3685, 2.1565', 'Ruta llarga però fàcil, 30 minuts', 7, 'Baixa', NULL);
+		(5, 7, 'Pla dels Cims', '41.3685, 2.1565', 'Ruta llarga però fàcil, 30 minuts', 9, 'Baixa', NULL);
 
 INSERT INTO vies (sector_id, ancoratge_id, tipus_roca_id, escalador_id, via_num, nom, orientacio, estat, tipus, llargada) 
 	VALUES 
