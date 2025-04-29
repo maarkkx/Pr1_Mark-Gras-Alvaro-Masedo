@@ -13,6 +13,7 @@ public class Controller {
         while (num != 0) {
             View.menuPrincipal();
             num = scan.nextInt();
+            scan.nextLine();
             switch (num) {
                 case 1:
                     //ESCOLAS
@@ -20,6 +21,7 @@ public class Controller {
                     while (num1 != 0) {
                         View.menuEscoles();
                         num1 = scan.nextInt();
+                        scan.nextLine();
                         SQLiteEscolesDAO dao = new SQLiteEscolesDAO();
                         switch (num1) {
                             case 1:
@@ -51,6 +53,7 @@ public class Controller {
                     while (num2 != 0) {
                         View.menuSectors();
                         num2 = scan.nextInt();
+                        scan.nextLine();
                         switch (num2) {
                             case 1:
                                 SectorsController.afegirSector();
@@ -81,6 +84,7 @@ public class Controller {
                     while (num3 != 0) {
                         View.menuVies();
                         num3 = scan.nextInt();
+                        scan.nextLine();
                         switch (num3) {
                             case 1:
                                 break;
@@ -107,6 +111,7 @@ public class Controller {
                         SQLiteEscaladorsDAO dao = new SQLiteEscaladorsDAO();
                         View.menuEscaladors();
                         num4 = scan.nextInt();
+                        scan.nextLine();
                         switch (num4) {
                             case 1:
                                 EscaladorsController.crearEscalador();
@@ -150,6 +155,9 @@ public class Controller {
                     break;
 
                 case 8:
+                    //Escoles Restriccions
+                    SQLiteEscolesDAO dao4 = new SQLiteEscolesDAO();
+                    dao4.escolesRestriccio();
                     break;
 
                 case 9:

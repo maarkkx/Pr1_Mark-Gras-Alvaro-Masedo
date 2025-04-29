@@ -151,5 +151,26 @@ public class SQLiteEscolesDAO implements CRUD <Escoles> {
                 System.out.println(e);
             }
         }
+
+        public void escolesRestriccio() {
+        Connection con = DBConnection.openCon();
+            try {
+                PreparedStatement ps = con.prepareStatement("SELECT * FROM escoles WHERE restriccio IS NOT NULL OR restriccio != \"\" OR restriccio != \" \";");
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    System.out.printf("Escola ID: %-5d Poblacio ID: %-5d Nom: %-30s Aproximacio: %-40s Vies Qt: %-5d Popularitat: %-10s Restriccio: %-10s\n",
+                            rs.getInt("escola_id"),
+                            rs.getInt("poblacio_id"),
+                            rs.getString("nom"),
+                            rs.getString("aproximacio"),
+                            rs.getInt("vies_qt"),
+                            rs.getString("popularitat"),
+                            rs.getString("restriccio")
+                    );
+                }
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
     }
 

@@ -1,6 +1,9 @@
 package view;
 
 public class View {
+    /**
+     * Funcio mostrar menu principal
+     */
     public static void menuPrincipal(){
         System.out.println("Que vols tractar?\n");
 
@@ -14,11 +17,13 @@ public class View {
         System.out.println("8. Consultar escoles amb restriccions actives actualment");
         System.out.println("9. Mostrar sectors amb més de X vies disponibles");
         System.out.println("10. Mostrar escaladors amb el mateix nivell màxim assolit");
-        System.out.println("11. Mostrar les vies que han passat a \"Apte\" recentment");
-        System.out.println("12. Mostrar les vies més llargues d’una escola determinada");
+        System.out.println("11. Mostrar les vies més llargues d’una escola determinada");
         System.out.println("0. Sortir");
     }
 
+    /**
+     * Mostrar menu escoles
+     */
     public static void menuEscoles(){
         System.out.println("---- ESCOLES ----");
         System.out.println("Que vols fer?\n");
@@ -31,6 +36,9 @@ public class View {
         System.out.println("0. Sortir");
     }
 
+    /**
+     * Mostrar menu vies
+     */
     public static void menuVies(){
         System.out.println("---- VIES ----");
         System.out.println("Que vols fer?\n");
@@ -43,6 +51,9 @@ public class View {
         System.out.println("0. Sortir");
     }
 
+    /**
+     * Mostrar menu sectors
+     */
     public static void menuSectors(){
         System.out.println("---- SECTORS ----");
         System.out.println("Que vols fer?\n");
@@ -55,6 +66,9 @@ public class View {
         System.out.println("0. Sortir");
     }
 
+    /**
+     * mostrar menu escaladors
+     */
     public static void menuEscaladors(){
         System.out.println("---- ESCALADORS ----");
         System.out.println("Que vols fer?\n");
