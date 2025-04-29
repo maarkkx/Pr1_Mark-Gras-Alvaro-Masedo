@@ -8,6 +8,10 @@ import java.util.Scanner;
 
 public class EscaladorsController {
 
+    /**
+     * Funcio per crear un escalador cridant la funcio de Escaladors DAO.
+     * Crea un objecte i li passa a l'altre funcio
+     */
     public static void crearEscalador() {
 
         //Nom
@@ -114,6 +118,10 @@ public class EscaladorsController {
         dao.crear(escalador);
     }
 
+    /**
+     * Funcio per actualitzar un escalador cridant la funcio de escalador DAO.
+     * Crea un objecta que li passa a la funcio
+     */
     public static void actualitzarEscalador() {
 
         //Nom
@@ -221,6 +229,10 @@ public class EscaladorsController {
         dao.actualitzar(escalador);
     }
 
+    /**
+     * Funcio per eliminar un escalador.
+     * Mostra taula de escaladors i crida funcio de escalador dao per eliminar
+     */
     public static void eliminarEscalador() {
         SQLiteEscaladorsDAO dao = new SQLiteEscaladorsDAO();
         dao.llegirTot();
