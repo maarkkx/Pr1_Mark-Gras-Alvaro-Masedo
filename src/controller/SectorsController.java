@@ -60,7 +60,7 @@ public class SectorsController {
         int qtVies = -1;
         while (qtVies < 0) {
             System.out.println("Escriu la quantitat de vies per aquest sector (ha de ser un número positiu):");
-            if (scan.hasNextInt()) {
+            if (scan.hasNextLine()) {
                 qtVies = scan.nextInt();
                 if (qtVies < 0) {
                     System.out.println("La quantitat de vies ha de ser un número positiu.");
@@ -165,7 +165,7 @@ public class SectorsController {
         int qtVies = -1;
         while (qtVies < 0) {
             System.out.println("Escriu la nova quantitat de vies per aquest sector (ha de ser un número positiu):");
-            if (scan.hasNextInt()) {
+            if (scan.hasNextLine()) {
                 qtVies = scan.nextInt();
                 if (qtVies < 0) {
                     System.out.println("La quantitat de vies ha de ser un número positiu.");
@@ -265,7 +265,7 @@ public class SectorsController {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error al comprobar la escuela: " + e.getMessage());
+            System.out.println("Error al comprobar l'escola: " + e.getMessage());
             return -1;
         }
     }
