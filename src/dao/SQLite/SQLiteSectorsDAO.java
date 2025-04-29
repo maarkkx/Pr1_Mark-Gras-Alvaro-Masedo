@@ -144,7 +144,7 @@ public class SQLiteSectorsDAO implements CRUD<Sectors> {
         try (PreparedStatement stmt = con.prepareStatement(sql)){
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
-                System.out.printf("Sector ID: %-5d Escola ID: %-5d Sector Num: %-5d Nom: %-20s Coordenades: %-20s Aproximacio: %-20s Vies Qt: %-5d Popularitat: %-6s Restriccio: %-10s\n",
+                System.out.printf("Sector ID: %-5d Escola ID: %-5d Sector Num: %-5d Nom: %-20s Coordenades: %-20s Aproximacio: %-45s Vies Qt: %-5d Popularitat: %-6s Restriccio: %-10s\n",
                         rs.getInt("sector_id"),
                         rs.getInt("escola_id"),
                         rs.getInt("sector_num"),

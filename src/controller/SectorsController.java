@@ -28,10 +28,12 @@ public class SectorsController {
         System.out.println("La escola és vàlida");
         int escola_id = obtenirIdEscola(nomEscola);
 
-        System.out.println("Quin és el nom del sector?");
+        System.out.println("Escriu el nom del sector:");
         String nomSector = scan.nextLine();
-        while (nomSector == null || nomSector.trim().isEmpty()){
-            System.out.println("Error: torna a escriure el nom del Sector.");
+
+        while (SectorNom(nomSector, escola_id)) {
+            System.out.println("Aquest nom de sector ja existeix per aquesta escola.");
+            System.out.println("Escriu un altre nom:");
             nomSector = scan.nextLine();
         }
 
@@ -130,12 +132,15 @@ public class SectorsController {
         System.out.println("La escola és vàlida");
         int escola_id = obtenirIdEscola(nomEscola);
 
-        System.out.println("Quin és el nou nom del sector?");
+        System.out.println("Escriu el nou nom del sector:");
         String nomSector = scan.nextLine();
-        while (nomSector == null || nomSector.trim().isEmpty()){
-            System.out.println("Error: torna a escriure el nou nom del Sector.");
+
+        while (SectorNom(nomSector, escola_id)) {
+            System.out.println("Aquest nom de sector ja existeix per aquesta escola.");
+            System.out.println("Escriu un altre nom:");
             nomSector = scan.nextLine();
         }
+
 
         System.out.println("Escriu les noves coordenades de aquest Sector: ");
         System.out.println("Han de tenir aquest format: (00.0000, 00.0000)");
@@ -265,6 +270,28 @@ public class SectorsController {
         }
     }
 
+    public static boolean SectorNom(String nomSector, int escolaId) {
+        String sql = "SELECT COUNT(*) FROM sectors WHERE nom = ? AND escola_id = ?";
+        Connection con = DBConnection.openCon();
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, nomSector);
+            stmt.setInt(2, escolaId);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al comprovar el nom del sector a la base de dades");
+        }
+
+        return false;
+    }
+
     public static boolean comprovarCoordenades(String coordenades){
         String regex = "^\\d{2}\\.\\d{4},\\d{2}\\.\\d{4}$";
         Pattern pattern = Pattern.compile(regex);
@@ -275,12 +302,10 @@ public class SectorsController {
 
     public static boolean comprovarVies(int escola_id, int vies_a_afegir) {
         int vies_totals_sectors = obtenirViesTotalsPerSector(escola_id);
-
         int vies_disponibles = ObtenirViesDisponiblesPerEscoles(escola_id);
-
         int vies_restants = vies_disponibles - vies_totals_sectors;
 
-        return vies_restants >= vies_a_afegir;
+        return vies_restants >= vies_a_afegir && !quantitatViesRepetida(escola_id, vies_a_afegir);
     }
 
     public static int obtenirViesTotalsPerSector(int escola_id) {
@@ -315,6 +340,24 @@ public class SectorsController {
             System.out.println("Error al obtener vías disponibles en la escuela.");
         }
         return viesDisponibles;
+    }
+
+    public static boolean quantitatViesRepetida(int escola_id, int vies_a_afegir) {
+        String sql = "SELECT COUNT(*) FROM sectors WHERE escola_id = ? AND vies_qt = ?";
+        try (Connection con = DBConnection.openCon();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setInt(1, escola_id);
+            stmt.setInt(2, vies_a_afegir);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al comprobar si la quantitat de vies ya existeix.");
+        }
+        return false;
     }
 
     public static String comprovarPopularitat(String popularitat){
