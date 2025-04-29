@@ -144,6 +144,9 @@ public class Controller {
                     break;
 
                 case 7:
+                    //Vies per estat
+                    SQLiteViesDAO dao3 = new SQLiteViesDAO();
+                    dao3.estatVies();
                     break;
 
                 case 8:

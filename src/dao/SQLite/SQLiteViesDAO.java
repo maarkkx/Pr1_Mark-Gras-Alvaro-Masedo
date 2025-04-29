@@ -3,10 +3,7 @@ import dao.DBConnection;
 import model.CRUD;
 import model.Vies;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 public class SQLiteViesDAO implements CRUD<Vies> {
@@ -309,7 +306,47 @@ public class SQLiteViesDAO implements CRUD<Vies> {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
 
+    public void estatVies() {
+        Connection con = DBConnection.openCon();
+        Scanner scan = new Scanner(System.in);
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM vies WHERE estat = ?;");
+            System.out.println("Quin estat de via vols buscar? 1-Apta 2-En construcció 3-Tancada");
+            String input = "";
+            int num = scan.nextInt();
+            scan.nextLine();
+            switch (num) {
+                case 1:
+                    input = "Apta";
+                    break;
 
+                case 2:
+                    input = "En construcció";
+                    break;
+
+                case 3:
+                    input = "Tancada";
+                    break;
+            }
+            ps.setString(1, input);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                System.out.printf("Sector ID: %-5d Escalador ID: %-5d Núm Via: %-5d Nom: %-30s Orientació: %-5s Estat: %-18s Tipus: %-2s Llargada: %-3d\n",
+                        rs.getInt("sector_id"),
+                        rs.getInt("escalador_id"),
+                        rs.getInt("via_num"),
+                        rs.getString("nom"),
+                        rs.getString("orientacio"),
+                        rs.getString("estat"),
+                        rs.getString("tipus"),
+                        rs.getInt("llargada"));
+            }
+            con.close();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 }
