@@ -31,15 +31,18 @@ public class EscaladorsController {
         //edat
         System.out.println("Escriu l'edat: ");
             int edad = scan.nextInt();
+            scan.nextLine();
 
 
         //Nivell
         String nivell = "";
         System.out.println("Escull la dificultat maxima del escalador, primer un numero del 4 al 9: ");
         int niv = scan.nextInt();
+        scan.nextLine();
         while (niv < 4 && niv > 9) {
             System.out.println("El nivell ha de ser un numero del 4 al 9, torna a intentar-ho: ");
             niv = scan.nextInt();
+            scan.nextLine();
         }
 
         if (niv == 4) {
@@ -89,6 +92,7 @@ public class EscaladorsController {
         String estil = "";
         System.out.println("Quin estil fa? (Escriu el numero): \n 1-Esportiva 2-Gel 3-Clàssica");
         int est = scan.nextInt();
+        scan.nextLine();
         switch (est) {
             case 1:
                 estil = "esportiva";
@@ -133,15 +137,18 @@ public class EscaladorsController {
         //edat
         System.out.println("Escriu l'edat: ");
         int edad = scan.nextInt();
+        scan.nextLine();
 
 
         //Nivell
         String nivell = "";
         System.out.println("Escull la dificultat maxima del escalador, primer un numero del 4 al 9: ");
         int niv = scan.nextInt();
+        scan.nextLine();
         while (niv < 4 && niv > 9) {
             System.out.println("El nivell ha de ser un numero del 4 al 9, torna a intentar-ho: ");
             niv = scan.nextInt();
+            scan.nextLine();
         }
 
         if (niv == 4) {
@@ -191,6 +198,7 @@ public class EscaladorsController {
         String estil = "";
         System.out.println("Quin estil fa? (Escriu el numero): \n 1-Esportiva 2-Gel 3-Clàssica");
         int est = scan.nextInt();
+        scan.nextLine();
         switch (est) {
             case 1:
                 estil = "esportiva";

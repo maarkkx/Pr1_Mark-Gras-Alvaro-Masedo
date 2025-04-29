@@ -23,6 +23,9 @@ public class Main {
             System.out.println("No s'ha pogut establir la connexió.");
         }
 
+        SQLiteViesDAO dao = new SQLiteViesDAO();
+        dao.viesRangDificultat();
+
         Controller.menu();
         try {
             con.close();

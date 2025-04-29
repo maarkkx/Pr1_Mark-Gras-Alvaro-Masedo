@@ -47,6 +47,7 @@ public class SQLiteViesDAO implements CRUD<Vies> {
         try (PreparedStatement stmt = con.prepareStatement(sql)){
             System.out.println("Escriu la ID de la via que vols actualitzar: ");
             int via_id = scan.nextInt();
+            scan.nextLine();
 
             PreparedStatement check = con.prepareStatement("SELECT COUNT(*) FROM vies WHERE via_id = ?");
             check.setInt(1, via_id);
@@ -85,6 +86,7 @@ public class SQLiteViesDAO implements CRUD<Vies> {
         try (PreparedStatement stmt = con.prepareStatement(sql)){
             System.out.println("Escriu la ID de la via que vols eliminar: ");
             int via_id = scan.nextInt();
+            scan.nextLine();
 
             PreparedStatement check = con.prepareStatement("SELECT COUNT(*) FROM vies WHERE via_id = ?");
             check.setInt(1, via_id);
@@ -113,7 +115,7 @@ public class SQLiteViesDAO implements CRUD<Vies> {
         try (PreparedStatement stmt = con.prepareStatement(sql)){
             System.out.println("Escriu la ID de la via que vols comprovar: ");
             int via_id = scan.nextInt();
-
+            scan.nextLine();
             PreparedStatement check = con.prepareStatement("SELECT COUNT(*) FROM vies WHERE via_id = ?");
             check.setInt(1,via_id);
             ResultSet rs = check.executeQuery();
@@ -190,5 +192,124 @@ public class SQLiteViesDAO implements CRUD<Vies> {
         } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    public void viesRangDificultat() {
+        Scanner scan = new Scanner(System.in);
+        Connection con = DBConnection.openCon();
+        String nivell = "";
+        System.out.println("Escull la primera dificultat del rang, primer un numero del 4 al 9: ");
+        int niv = scan.nextInt();
+        scan.nextLine();
+        while (niv < 4 && niv > 9) {
+            System.out.println("El nivell ha de ser un numero del 4 al 9, torna a intentar-ho: ");
+            niv = scan.nextInt();
+            scan.nextLine();
+        }
+
+        if (niv == 4) {
+            nivell += 4;
+            System.out.println("Dificultat 4 o 4+? (No escriguis res en cas de 4 o escriu nomes + en cas de 4+): ");
+            nivell += scan.nextLine();
+        } else if (niv == 5) {
+            nivell += 5;
+            System.out.println("Dificultat 5 o 5+? (No escriguis res en cas de 5 o escriu nomes + en cas de 5+): ");
+            nivell += scan.nextLine();
+        } else if (niv == 6) {
+            nivell += 6;
+            System.out.println("Dificultat 6a, 6b o 6c? (Escriu nomes la lletra en minuscula)");
+            nivell += scan.nextLine();
+
+            System.out.println("Dificultat + o no? (No escriguis res si no es + o escriu nomes + si ho es");
+            nivell += scan.nextLine();
+        } else if (niv == 7) {
+            nivell += 7;
+            System.out.println("Dificultat 7a, 7b o 7c? (Escriu nomes la lletra en minuscula)");
+            nivell += scan.nextLine();
+
+            System.out.println("Dificultat + o no? (No escriguis res si no es + o escriu nomes + si ho es");
+            nivell += scan.nextLine();
+        } else if (niv == 8) {
+            nivell += 8;
+            System.out.println("Dificultat 8a, 8b o 8c? (Escriu nomes la lletra en minuscula)");
+            nivell += scan.nextLine();
+
+            System.out.println("Dificultat + o no? (No escriguis res si no es + o escriu nomes + si ho es");
+            nivell += scan.nextLine();
+        } else if (niv == 9) {
+            nivell += 9;
+            System.out.println("Dificultat 9a, 9b o 9c? (Escriu nomes la lletra en minuscula)");
+            nivell += scan.nextLine();
+
+            System.out.println("Dificultat + o no? (No escriguis res si no es + o escriu nomes + si ho es");
+            nivell += scan.nextLine();
+        }
+
+        String nivell2 = "";
+        System.out.println("Escull la segona dificultat del rang, primer un numero del 4 al 9: ");
+        int niv2 = scan.nextInt();
+        scan.nextLine();
+        while (niv2 < 4 && niv2 > 9) {
+            System.out.println("El nivell ha de ser un numero del 4 al 9, torna a intentar-ho: ");
+            niv2 = scan.nextInt();
+            scan.nextLine();
+        }
+
+        if (niv2 == 4) {
+            nivell2 += 4;
+            System.out.println("Dificultat 4 o 4+? (No escriguis res en cas de 4 o escriu nomes + en cas de 4+): ");
+            nivell2 += scan.nextLine();
+        } else if (niv2 == 5) {
+            nivell2 += 5;
+            System.out.println("Dificultat 5 o 5+? (No escriguis res en cas de 5 o escriu nomes + en cas de 5+): ");
+            nivell2 += scan.nextLine();
+        } else if (niv2 == 6) {
+            nivell2 += 6;
+            System.out.println("Dificultat 6a, 6b o 6c? (Escriu nomes la lletra en minuscula)");
+            nivell2 += scan.nextLine();
+
+            System.out.println("Dificultat + o no? (No escriguis res si no es + o escriu nomes + si ho es");
+            nivell2 += scan.nextLine();
+        } else if (niv2 == 7) {
+            nivell2 += 7;
+            System.out.println("Dificultat 7a, 7b o 7c? (Escriu nomes la lletra en minuscula)");
+            nivell2 += scan.nextLine();
+
+            System.out.println("Dificultat + o no? (No escriguis res si no es + o escriu nomes + si ho es");
+            nivell2 += scan.nextLine();
+        } else if (niv2 == 8) {
+            nivell2 += 8;
+            System.out.println("Dificultat 8a, 8b o 8c? (Escriu nomes la lletra en minuscula)");
+            nivell2 += scan.nextLine();
+
+            System.out.println("Dificultat + o no? (No escriguis res si no es + o escriu nomes + si ho es");
+            nivell2 += scan.nextLine();
+        } else if (niv2 == 9) {
+            nivell2 += 9;
+            System.out.println("Dificultat 9a, 9b o 9c? (Escriu nomes la lletra en minuscula)");
+            nivell2 += scan.nextLine();
+
+            System.out.println("Dificultat + o no? (No escriguis res si no es + o escriu nomes + si ho es");
+            nivell2 += scan.nextLine();
+        }
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT v.nom AS via_nom, d.nom AS grau, s.nom AS sector_nom, e.nom AS escola_nom FROM vies v JOIN trams t ON v.via_id = t.via_id JOIN dificultats d ON t.dificultat_id = d.dificultat_id JOIN sectors s ON v.sector_id = s.sector_id JOIN escoles e ON s.escola_id = e.escola_id WHERE d.nom BETWEEN ? AND ? ORDER BY d.nom;");
+            ps.setString(1, nivell);
+            ps.setString(2, nivell2);
+            ResultSet rs = ps.executeQuery();
+            System.out.printf("%-30s %-8s %-20s %-20s\n", "Nom Via", "Grau", "Sector", "Escola");
+            while (rs.next()) {
+                System.out.printf("%-30s %-8s %-25s %-25s\n",
+                        rs.getString("via_nom"),
+                        rs.getString("grau"),
+                        rs.getString("sector_nom"),
+                        rs.getString("escola_nom"));
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+
     }
 }
