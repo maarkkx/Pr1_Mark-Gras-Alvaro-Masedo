@@ -2,6 +2,7 @@ package controller;
 import dao.SQLite.SQLiteEscaladorsDAO;
 import dao.SQLite.SQLiteEscolesDAO;
 import dao.SQLite.SQLiteSectorsDAO;
+import dao.SQLite.SQLiteViesDAO;
 import view.*;
 import java.util.Scanner;
 
@@ -131,6 +132,9 @@ public class Controller {
                     break;
 
                 case 5:
+                    //Vies per escola
+                    SQLiteViesDAO dao = new SQLiteViesDAO();
+                    dao.totesViesEscola();
                     break;
 
                 case 6:
