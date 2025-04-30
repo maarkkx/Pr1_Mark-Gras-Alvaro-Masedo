@@ -220,6 +220,7 @@ public class SectorsController {
         SQLiteSectorsDAO dao = new SQLiteSectorsDAO();
         dao.llegirTot();
         dao.actualitzar(newSector);
+        System.out.println("Sector actualitzat correctament");
     }
 
     public static void eliminarSector(){

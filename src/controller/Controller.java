@@ -87,18 +87,23 @@ public class Controller {
                         scan.nextLine();
                         switch (num3) {
                             case 1:
+                                ViesController.afegirVia();
                                 break;
 
                             case 2:
+                                ViesController.actualitzarVia();
                                 break;
 
                             case 3:
+                                ViesController.eliminarVia();
                                 break;
 
                             case 4:
+                                ViesController.llistarUnaVia();
                                 break;
 
                             case 5:
+                                ViesController.llistarTotesVies();
                                 break;
                         }
                     }

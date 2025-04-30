@@ -1,6 +1,10 @@
 package controller;
 
 import dao.DBConnection;
+import dao.SQLite.SQLiteSectorsDAO;
+import dao.SQLite.SQLiteViesDAO;
+import model.Sectors;
+import model.Vies;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -66,7 +70,7 @@ public class ViesController {
 
         int seguentViaNum = obtenirViaNum(id_Sector);
 
-        System.out.println("\nEscriu el nou nom del sector:");
+        System.out.println("\nEscriu el nom de la via:");
         String nomVia = scan.nextLine();
 
         while (ViaNom(nomVia, id_Sector, seguentViaNum)) {
@@ -87,16 +91,170 @@ public class ViesController {
         System.out.println("orientacio afegida correctament.");
         String orientacioFormat = orientacio.toUpperCase();
 
-        System.out.println("\nEscriu l'estat de la via (Apta, En construcció o Tancada)");
+        System.out.println("\nEscriu l'estat de la via (Apta, Construcció o Tancada)");
         String estat = scan.nextLine();
         while (comprovarEstat(estat) == null) {
             System.out.println("Error: L'estat està mal introduït.");
+            System.out.println("Escriu l'estat de la via (Apta, Construcció o Tancada)");
             estat = scan.nextLine();
         }
 
         int llargadaVia = demanarLlargada(tipus, scan);
+
+        Vies newVia = new Vies(
+                0,
+                id_Sector,
+                ancoratgeId,
+                idRoca,
+                idEscalador,
+                seguentViaNum,
+                nomVia,
+                orientacioFormat,
+                estat,
+                tipus,
+                llargadaVia
+        );
+
+        SQLiteViesDAO dao = new SQLiteViesDAO();
+        dao.crear(newVia);
+        System.out.println("La Via s'ha afegit correctament.");
     }
 
+    public static void actualitzarVia() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Introdueix el nou nom del Sector on es troba la via");
+        String nom_Sector = scan.nextLine();
+
+        int id_Sector = obtenirIDSector(nom_Sector);
+        while (id_Sector == -1) {
+            System.out.println("Aquest sector no exsisteix.");
+            System.out.println("Introdueix el nou nom del Sector on es troba la via");
+            nom_Sector = scan.nextLine();
+            obtenirIDSector(nom_Sector);
+        }
+
+        System.out.println("El sector és vàlid");
+
+        System.out.println("\nEscriu el nou tipus de via");
+        String tipus = scan.nextLine();
+        while (tipusVia(tipus) == null) {
+            System.out.println("Error: El nou tipus está mal introduït.");
+            tipus = scan.nextLine();
+        }
+
+        System.out.println("Tipus introduït correctament: " + tipus);
+        String tipusMajus = tipus.substring(0, 1).toUpperCase() + tipus.substring(1).toLowerCase();
+
+        int ancoratgeId = ancoratgeValid(scan, tipusMajus);
+
+        System.out.println("Introdueix el nou nom del tipus de roca");
+        String nomRoca = scan.nextLine();
+
+        int idRoca = obtenirRocaID(nomRoca);
+        while (idRoca == -1) {
+            System.out.println("Aquest tipus de roca no exsisteix.");
+            System.out.println("Introdueix el nou nom del tipus de roca");
+            nomRoca = scan.nextLine();
+            obtenirRocaID(nomRoca);
+        }
+
+        System.out.println("El tipus de roca és vàlid");
+
+        System.out.println("\nIntrodueix el nou nom del Escalador");
+        String nomEscalador = scan.nextLine();
+
+        int idEscalador = obtenirEscaladorID(nomEscalador);
+        while (idEscalador == -1) {
+            System.out.println("Aquest escalador no exsisteix.");
+            System.out.println("Introdueix el nou nom del Escalador");
+            nomEscalador = scan.nextLine();
+            obtenirEscaladorID(nomEscalador);
+        }
+
+        System.out.println("El nom de l'escalador és vàlid");
+
+        int seguentViaNum = obtenirViaNum(id_Sector);
+
+        System.out.println("\nEscriu el nou nom de la via:");
+        String nomVia = scan.nextLine();
+
+        while (ViaNom(nomVia, id_Sector, seguentViaNum)) {
+            System.out.println("Aquest nom de via ja existeix per aquesta escola.");
+            System.out.println("Escriu un altre nom:");
+            nomVia = scan.nextLine();
+        }
+        System.out.println("Nom afegit correctament.");
+
+        System.out.println("\nEscriu la nova orientació de la via (N,S,E,O,SO,SE,NO,NE");
+        String orientacio = scan.nextLine();
+
+        while (comprobarOrientacio(orientacio) == null) {
+            System.out.println("Aquesta orientació es incorrecta.");
+            System.out.println("Escriu la nova orientació de la via (N,S,E,O,SO,SE,NO,NE");
+            orientacio = scan.nextLine();
+        }
+        System.out.println("orientacio afegida correctament.");
+        String orientacioFormat = orientacio.toUpperCase();
+
+        System.out.println("\nEscriu el nou estat de la via (Apta, Construcció o Tancada)");
+        String estat = scan.nextLine();
+        while (comprovarEstat(estat) == null) {
+            System.out.println("Error: L'estat està mal introduït.");
+            System.out.println("Escriu el nou estat de la via (Apta, Construcció o Tancada)");
+            estat = scan.nextLine();
+        }
+
+        int llargadaVia = demanarLlargada(tipus, scan);
+
+        Vies newVia = new Vies(
+                0,
+                id_Sector,
+                ancoratgeId,
+                idRoca,
+                idEscalador,
+                seguentViaNum,
+                nomVia,
+                orientacioFormat,
+                estat,
+                tipus,
+                llargadaVia
+        );
+
+        SQLiteViesDAO dao = new SQLiteViesDAO();
+        dao.llegirTot();
+        dao.actualitzar(newVia);
+        System.out.println("La Via s'ha actualitzat correctament.");
+    }
+
+    public static void eliminarVia(){
+        Vies newVia = new Vies(
+                1,
+                2,
+                2,
+                2,
+                2,
+                2,
+                "a",
+                "A",
+                "2",
+                "E",
+                2
+        );
+
+        SQLiteViesDAO dao = new SQLiteViesDAO();
+        dao.llegirTot();
+        dao.eliminar(newVia);
+    }
+
+    public static void llistarUnaVia(){
+        SQLiteViesDAO dao = new SQLiteViesDAO();
+        dao.llegir();
+    }
+
+    public static void llistarTotesVies(){
+        SQLiteViesDAO dao = new SQLiteViesDAO();
+        dao.llegirTot();
+    }
 
     public static int obtenirIDSector(String nomSector) {
         String sql = "SELECT sector_id FROM sectors WHERE nom = ?";
