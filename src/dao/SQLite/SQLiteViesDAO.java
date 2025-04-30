@@ -323,7 +323,7 @@ public class SQLiteViesDAO implements CRUD<Vies> {
                     break;
 
                 case 2:
-                    input = "En construcció";
+                    input = "Construcció";
                     break;
 
                 case 3:

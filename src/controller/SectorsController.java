@@ -140,9 +140,10 @@ public class SectorsController {
             System.out.println("Escriu un altre nom:");
             nomSector = scan.nextLine();
         }
+        System.out.println("Nom afegit correctament.");
 
 
-        System.out.println("Escriu les noves coordenades de aquest Sector: ");
+        System.out.println("\nEscriu les noves coordenades de aquest Sector: ");
         System.out.println("Han de tenir aquest format: (00.0000, 00.0000)");
         String coordenades = scan.nextLine();
 

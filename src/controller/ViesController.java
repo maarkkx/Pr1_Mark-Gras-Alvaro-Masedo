@@ -28,7 +28,7 @@ public class ViesController {
 
         System.out.println("\nEscriu el tipus de via");
         String tipus = scan.nextLine();
-        while (tipusVia(tipus) == null){
+        while (tipusVia(tipus) == null) {
             System.out.println("Error: El tipus está mal introduït.");
             tipus = scan.nextLine();
         }
@@ -42,7 +42,7 @@ public class ViesController {
         String nomRoca = scan.nextLine();
 
         int idRoca = obtenirRocaID(nomRoca);
-        while (idRoca == -1){
+        while (idRoca == -1) {
             System.out.println("Aquest tipus de roca no exsisteix.");
             System.out.println("Introdueix el nom del tipus de roca");
             nomRoca = scan.nextLine();
@@ -50,19 +50,64 @@ public class ViesController {
         }
 
         System.out.println("El tipus de roca és vàlid");
+
+        System.out.println("\nIntrodueix el nom del Escalador");
+        String nomEscalador = scan.nextLine();
+
+        int idEscalador = obtenirEscaladorID(nomEscalador);
+        while (idEscalador == -1) {
+            System.out.println("Aquest escalador no exsisteix.");
+            System.out.println("Introdueix el nom del Escalador");
+            nomEscalador = scan.nextLine();
+            obtenirEscaladorID(nomEscalador);
+        }
+
+        System.out.println("El nom de l'escalador és vàlid");
+
+        int seguentViaNum = obtenirViaNum(id_Sector);
+
+        System.out.println("\nEscriu el nou nom del sector:");
+        String nomVia = scan.nextLine();
+
+        while (ViaNom(nomVia, id_Sector, seguentViaNum)) {
+            System.out.println("Aquest nom de via ja existeix per aquesta escola.");
+            System.out.println("Escriu un altre nom:");
+            nomVia = scan.nextLine();
+        }
+        System.out.println("Nom afegit correctament.");
+
+        System.out.println("\nEscriu la orientació de la via (N,S,E,O,SO,SE,NO,NE");
+        String orientacio = scan.nextLine();
+
+        while (comprobarOrientacio(orientacio) == null) {
+            System.out.println("Aquesta orientació es incorrecta.");
+            System.out.println("Escriu la orientació de la via (N,S,E,O,SO,SE,NO,NE");
+            orientacio = scan.nextLine();
+        }
+        System.out.println("orientacio afegida correctament.");
+        String orientacioFormat = orientacio.toUpperCase();
+
+        System.out.println("\nEscriu l'estat de la via (Apta, En construcció o Tancada)");
+        String estat = scan.nextLine();
+        while (comprovarEstat(estat) == null) {
+            System.out.println("Error: L'estat està mal introduït.");
+            estat = scan.nextLine();
+        }
+
+        int llargadaVia = demanarLlargada(tipus, scan);
     }
 
 
-    public static int obtenirIDSector(String nomSector){
+    public static int obtenirIDSector(String nomSector) {
         String sql = "SELECT sector_id FROM sectors WHERE nom = ?";
 
-        try(Connection con = DBConnection.openCon();
-            PreparedStatement stmt = con.prepareStatement(sql)){
+        try (Connection con = DBConnection.openCon();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
 
             stmt.setString(1, nomSector);
             ResultSet rs = stmt.executeQuery();
 
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getInt("sector_id");
             } else {
                 return -1;
@@ -74,39 +119,39 @@ public class ViesController {
         }
     }
 
-    public static String tipusVia(String tipus){
+    public static String tipusVia(String tipus) {
         if (tipus == null || tipus.trim().isEmpty()) {
             return null;
         }
 
         tipus = tipus.substring(0, 1).toUpperCase();
 
-        if (tipus.equals("C") || tipus.equals("E") || tipus.equals("G")){
+        if (tipus.equals("C") || tipus.equals("E") || tipus.equals("G")) {
             return tipus;
         } else {
             return null;
         }
     }
 
-    public static int ancoratgeValid(Scanner scan, String tipusVia){
-        Map<String,List<String>> ancoratgesValids = new HashMap<>();
+    public static int ancoratgeValid(Scanner scan, String tipusVia) {
+        Map<String, List<String>> ancoratgesValids = new HashMap<>();
 
         ancoratgesValids.put("G", Arrays.asList("friends", "tascons", "bagues", "pitons", "tricams", "bigbros"));
         ancoratgesValids.put("E", Arrays.asList("spits", "parabolts", "químics"));
         ancoratgesValids.put("C", Arrays.asList("friends", "tascons", "bagues", "pitons", "tricams", "bigbros", "spits", "parabolts", "químics"));
 
-        while(true){
+        while (true) {
             System.out.println("Introdueix el tipus d'ancoratge");
             String ancoratgeNom = scan.nextLine().trim().toLowerCase();
 
             int ancoratgeID = obtenirAncoratgeID(ancoratgeNom);
-            if (ancoratgeID == -1){
+            if (ancoratgeID == -1) {
                 System.out.println("L'ancoratge introduït no existeix");
                 continue;
             }
 
             List<String> valids = ancoratgesValids.get(tipusVia.toUpperCase());
-            if (!valids.contains(ancoratgeNom)){
+            if (!valids.contains(ancoratgeNom)) {
                 System.out.println("Aquest tipus d'ancoratge no és vàlid per a una via de tipus " + tipusVia);
                 continue;
             }
@@ -148,25 +193,65 @@ public class ViesController {
         return -1;
     }
 
+    public static int obtenirEscaladorID(String nom) {
+        String sql = "SELECT escalador_id FROM escaladors WHERE LOWER(nom) = ?";
+        try (Connection con = DBConnection.openCon();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
 
+            stmt.setString(1, nom.toLowerCase());
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("escalador_id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al buscar l'Escalador per nom.");
+        }
+        return -1;
+    }
 
+    public static int obtenirViaNum(int sector_id) {
+        String sql = "SELECT MAX(via_num) FROM vies WHERE sector_id = ?";
+        int viaNum = 1;
 
+        try (Connection con = DBConnection.openCon();
+             PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, sector_id);
+            ResultSet rs = stmt.executeQuery();
 
+            if (rs.next()) {
+                int maxViaNum = rs.getInt(1);
+                if (maxViaNum > 0) {
+                    viaNum = maxViaNum + 1;
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error obtenir el seguent ViaNum: " + e.getMessage());
+        }
 
+        return viaNum;
+    }
 
-
-
-
-
-
-
-    public static boolean SectorNom(String nomSector, int escolaId) {
-        String sql = "SELECT COUNT(*) FROM sectors WHERE nom = ? AND escola_id = ?";
+    public static boolean ViaNom(String nomVia, int sector_id, int seguentViaNum) {
+        String sql = "SELECT COUNT(*) FROM vies WHERE nom = ? AND sector_id = ?";
         Connection con = DBConnection.openCon();
+        String regex = "^Via(\\d{1,2})-([A-Z][a-zA-Z]*)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(nomVia);
+
+        if (!matcher.matches()) {
+            System.out.println("El nom de la via no compleix el format correcte (ViaX-Nom).");
+            return false;
+        }
+
+        int numeroVia = Integer.parseInt(matcher.group(1));
+        if (numeroVia != seguentViaNum) {
+            System.out.println("El número de la via no coincideix amb el número esperat: " + seguentViaNum);
+            return false;
+        }
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setString(1, nomSector);
-            stmt.setInt(2, escolaId);
+            stmt.setString(1, nomVia);
+            stmt.setInt(2, sector_id);
 
             ResultSet rs = stmt.executeQuery();
 
@@ -176,115 +261,80 @@ public class ViesController {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error al comprovar el nom del sector a la base de dades");
+            System.out.println("Error al comprovar el nom de la via a la base de dades");
         }
 
         return false;
     }
 
-    public static boolean comprovarCoordenades(String coordenades){
-        String regex = "^\\d{2}\\.\\d{4},\\d{2}\\.\\d{4}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(coordenades);
-
-        return matcher.matches();
-    }
-
-    public static boolean comprovarVies(int escola_id, int vies_a_afegir) {
-        int vies_totals_sectors = obtenirViesTotalsPerSector(escola_id);
-        int vies_disponibles = ObtenirViesDisponiblesPerEscoles(escola_id);
-        int vies_restants = vies_disponibles - vies_totals_sectors;
-
-        return vies_restants >= vies_a_afegir && !quantitatViesRepetida(escola_id, vies_a_afegir);
-    }
-
-    public static int obtenirViesTotalsPerSector(int escola_id) {
-        int totalVies = 0;
-        String sql = "SELECT SUM(vies_qt) FROM sectors WHERE escola_id = ?";
-
-        try (Connection con = DBConnection.openCon();
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, escola_id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                totalVies = rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al obtenir el total de vies per sector.");
-        }
-        return totalVies;
-    }
-
-    public static int ObtenirViesDisponiblesPerEscoles(int escola_id) {
-        int viesDisponibles = 0;
-        String sql = "SELECT vies_qt FROM escoles WHERE escola_id = ?";
-
-        try (Connection con = DBConnection.openCon(); PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setInt(1, escola_id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                viesDisponibles = rs.getInt("vies_qt");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al obtener vías disponibles en la escuela.");
-        }
-        return viesDisponibles;
-    }
-
-    public static boolean quantitatViesRepetida(int escola_id, int vies_a_afegir) {
-        String sql = "SELECT COUNT(*) FROM sectors WHERE escola_id = ? AND vies_qt = ?";
-        try (Connection con = DBConnection.openCon();
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, escola_id);
-            stmt.setInt(2, vies_a_afegir);
-
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
-        } catch (SQLException e) {
-            System.out.println("Error al comprobar si la quantitat de vies ya existeix.");
-        }
-        return false;
-    }
-
-    public static String comprobarRestriccio(String restriccio) {
-        if (restriccio.trim().isEmpty()) {
+    public static String comprobarOrientacio(String orientacio) {
+        if (orientacio == null || orientacio.trim().isEmpty()) {
             return null;
         }
 
-        String regex = "^\\d{4}-\\d{2}-\\d{2}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(restriccio);
+        orientacio = orientacio.toUpperCase();
 
-        if (matcher.matches()){
-            return restriccio;
+        if (orientacio.equals("N") ||
+                orientacio.equals("S") ||
+                orientacio.equals("E") ||
+                orientacio.equals("O") ||
+                orientacio.equals("SE") ||
+                orientacio.equals("SO") ||
+                orientacio.equals("NE") ||
+                orientacio.equals("NO")) {
+            return orientacio;
         } else {
             return null;
         }
     }
 
-    public static int obtenirSectorNum (int escola_id){
-        String sql = "SELECT MAX(sector_num) FROM sectors WHERE escola_id = ?";
-        int sectorNum = 1;
-
-        try (Connection con = DBConnection.openCon();
-             PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setInt(1, escola_id);
-            ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                int maxSectorNum = rs.getInt(1);
-                if (maxSectorNum > 0) {
-                    sectorNum = maxSectorNum + 1;
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println("Error obtenir el seguent SectorNum: " + e.getMessage());
+    public static String comprovarEstat(String estat) {
+        if (estat == null || estat.trim().isEmpty()) {
+            return null;
         }
 
-        return sectorNum;
+        estat = estat.substring(0, 1).toUpperCase() + estat.substring(1).toLowerCase();
+
+        if (estat.equals("Apta") || estat.equals("Construcció") || estat.equals("Tancada")) {
+            return estat;
+        } else {
+            return null;
+        }
+    }
+
+    public static int demanarLlargada(String tipus, Scanner scan) {
+        int llargada = -1;
+
+        while (true) {
+            try {
+                System.out.println("Escriu la llargada de la via (en metres):");
+                System.out.println("Si es via Clàssica, introdueix un valor entre 15 i 30 metres");
+                System.out.println("Si es via de Gel, introdueix un valor entre 15 i 30 metres");
+                System.out.println("Si es via Esportiva, introdueix un valor entre 5 i 30 metres");
+                llargada = Integer.parseInt(scan.nextLine());
+
+                if (tipus.equalsIgnoreCase("C") || tipus.equalsIgnoreCase("G")) {
+                    if (llargada >= 15 && llargada <= 30) {
+                        break;
+                    } else {
+                        System.out.println("La llargada ha de ser entre 15 i 30 per a via Clàssica o Gel.");
+                    }
+                } else if (tipus.equalsIgnoreCase("E")) {
+                    if (llargada >= 5 && llargada <= 30) {
+                        break;
+                    } else {
+                        System.out.println("La llargada ha de ser entre 5 i 30 per a via Esportiva.");
+                    }
+                } else {
+                    System.out.println("Tipus de via no reconegut.");
+                    break;
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Introdueix un número vàlid.");
+            }
+        }
+
+        return llargada;
     }
 }
