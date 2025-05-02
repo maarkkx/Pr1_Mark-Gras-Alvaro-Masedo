@@ -168,4 +168,32 @@ public class SQLiteEscaladorsDAO implements CRUD<Escaladors> {
             System.out.println(e);
         }
     }
+
+    /**
+     * Recupera i mostra els escaladors que coincideixen amb un nivell concret.
+     * Fa una consulta a la taula `escaladors` filtrant pel camp `nivell`.
+     *
+     * @param nivell El nivell a buscar (per exemple, "7c").
+     */
+    public static void maximNivell(String nivell) {
+        Connection con = DBConnection.openCon();
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM escaladors WHERE nivell = ?;");
+            ps.setString(1, nivell);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                System.out.printf("ID: %-3d Nom: %-40s alies: %-15s Edat: %-3d Nivell: %-4s Nom via: %-25s Estil: %s\n",
+                        rs.getInt("escaldor_id"),
+                        rs.getString("nom"),
+                        rs.getString("alies"),
+                        rs.getInt("edad"),
+                        rs.getString("nivell"),
+                        rs.getString("via_nom"),
+                        rs.getString("estil")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }

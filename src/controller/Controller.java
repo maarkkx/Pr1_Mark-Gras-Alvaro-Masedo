@@ -3,7 +3,10 @@ import dao.SQLite.SQLiteEscaladorsDAO;
 import dao.SQLite.SQLiteEscolesDAO;
 import dao.SQLite.SQLiteSectorsDAO;
 import dao.SQLite.SQLiteViesDAO;
+import model.Vies;
 import view.*;
+
+import java.net.InetSocketAddress;
 import java.util.Scanner;
 
 public class Controller {
@@ -166,12 +169,21 @@ public class Controller {
                     break;
 
                 case 9:
+                    //Mostrar Sectors amb mes de X vies disponibles
+                    SectorsController dao5 = new SectorsController();
+                    dao5.demanarNumConsulta9();
                     break;
 
                 case 10:
+                    //Escaladors amb el mateix nivell
+                    EscaladorsController dao6 = new EscaladorsController();
+                    dao6.consulta10();
                     break;
 
                 case 11:
+                    //Vies mes llargues d'una escola
+                    ViesController dao7 = new ViesController();
+                    dao7.consulta11();
                     break;
             }
         }

@@ -239,4 +239,16 @@ public class EscaladorsController {
         Escaladors escalador = new Escaladors(1, "def", "def", 0,"def", "def", "def");
         dao.eliminar(escalador);
     }
+
+    /**
+     * Consulta i mostra tots els escaladors que tenen un nivell màxim especificat.
+     * Demana a l'usuari que introdueixi el nivell (per exemple, "7c") i crida
+     * al mètode a DAO que realitza la consulta a la base de dades.
+     */
+    public static void consulta10() {
+        System.out.println("Escriu el nivell maxim del escalador: (Ex: 7c)");
+        Scanner scan = new Scanner(System.in);
+        String nivell = scan.nextLine();
+        SQLiteEscaladorsDAO.maximNivell(nivell);
+    }
 }
